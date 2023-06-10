@@ -1,10 +1,2 @@
-
-- title: "Misc"
-  subcategories:
-    - subtitle: "Hobbis"
-      subhref: "/misc/"
-    - subtitle: ""
-      subhref: "/misc/item-2/"
-
 - title: "Misc"
   href: "/misc/"
