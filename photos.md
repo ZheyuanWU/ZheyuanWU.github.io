@@ -10,13 +10,11 @@ title: Photo Collections
 <br><br>
 
 ### Mar. 2023
-##### 
 ![](images/photo_2023-06-10_18-57-04.jpg)
 
 <br><br>
 
 ### Jan. 2023
-##### 
 ![](images/photo_2023-06-10_18-51-20.jpg)
 
 <br><br>
