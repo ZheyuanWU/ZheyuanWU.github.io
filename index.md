@@ -7,6 +7,8 @@ permalink: /
 
 Hi, here is Zheyuan! I am a Computer Science bachlor student at [Saarland University].
 
-I enjoy learning new abstract theories at university and would like to find more motivation through practice. So I am currently looking for a student job in coding, for any ideas or information please feel free to email me :D
+I enjoy learning new abstract theories at university and would like to find more motivation through practice. So I am currently looking for a student job in coding, for any ideas or information please feel free to [email me] :D
 
 [Saarland University]: https://saarland-informatics-campus.de/
+
+[email me]: mailto:zhwu00001@stud.uni-saarland.de
