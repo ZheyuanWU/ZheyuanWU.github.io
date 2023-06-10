@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Interests
+title: Hobbies
 permalink: /misc/
 ---
 
