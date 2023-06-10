@@ -1,10 +1,22 @@
 ---
 layout: page
 permalink: /misc/photos.html
-title: photo collections
+title: Photo Collections
 ---
-## June 6, 2023
-### UDS campus
-![test](images/photo_2023-06-10_17-47-06.jpg) 
+### Jun. 2023
+##### Forest in UDS Campus
+![](images/photo_2023-06-10_17-47-06.jpg)
 
-{% include image.html url="images/photo_2023-06-10_17-47-06.jpg" width="500px" align="middle" %}
+<br><br>
+
+### Mar. 2023
+##### 
+![](images/photo_2023-06-10_18-57-04.jpg)
+
+<br><br>
+
+### Jan. 2023
+##### 
+![](images/photo_2023-06-10_18-51-20.jpg)
+
+<br><br>
