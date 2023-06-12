@@ -10,6 +10,7 @@ title: Photo Collections
 <br><br>
 
 ### Mar. 2023
+##### Before the storm
 ![](images/photo_2023-06-10_18-57-04.jpg)
 
 <br><br>
@@ -71,5 +72,6 @@ title: Photo Collections
 <br><br>
 
 ### Feb. 2019
+##### A fire-related ceremony in 2019
 ![](images/photo_2023-06-10_22-56-04.jpg)
 
