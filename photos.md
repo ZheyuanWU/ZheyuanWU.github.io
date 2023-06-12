@@ -31,6 +31,7 @@ title: Photo Collections
 <br><br>
 
 ### May 2022
+##### Absurd corner in a supermarket
 ![](images/photo_2023-06-10_23-36-26.jpg)
 
 <br><br>
