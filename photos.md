@@ -28,6 +28,8 @@ title: Photo Collections
 
 <br><br>
 
+### Jan. 2023
+##### Fire is the most fascinating element
 ![](images/photo_2023-06-10_23-38-40.jpg)
 
 <br><br>
