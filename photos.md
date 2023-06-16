@@ -4,13 +4,13 @@ permalink: /misc/photos.html
 title: Photo Collections
 ---
 ### Jun. 2023
-##### Forest in UDS Campus
+##### Forest in UDS Campus.
 ![](images/photo_2023-06-10_17-47-06.jpg)
 
 <br><br>
 
 ### Mar. 2023
-##### Before the storm
+##### Before the storm.
 ![](images/photo_2023-06-10_18-57-04.jpg)
 
 <br><br>
@@ -21,6 +21,7 @@ title: Photo Collections
 <br><br>
 
 ### Nov. 2022
+##### Fire is the most fascinating element to me.
 ![](images/photo_2023-06-10_23-38-40.jpg)
 
 <br><br>
