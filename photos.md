@@ -18,10 +18,16 @@ title: Photo Collections
 ### Jan. 2023
 ![](images/photo_2023-06-10_18-51-20.jpg)
 
+
 <br><br>
 
-### Nov. 2022
-##### Fire is the most fascinating element to me.
+### Jan. 2023
+
+![](images/photo_2023-06-16_20-55-18.jpg)
+
+
+<br><br>
+
 ![](images/photo_2023-06-10_23-38-40.jpg)
 
 <br><br>
@@ -32,7 +38,7 @@ title: Photo Collections
 <br><br>
 
 ### May 2022
-##### Absurd corner in a supermarket
+##### Absurd corner in a supermarket.
 ![](images/photo_2023-06-10_23-36-26.jpg)
 
 <br><br>
@@ -59,6 +65,7 @@ title: Photo Collections
 <br><br>
 
 ### Jun. 2021
+##### Summer in Clausthal.
 ![](images/photo_2023-06-10_23-05-28.jpg)
 
 <br><br>
