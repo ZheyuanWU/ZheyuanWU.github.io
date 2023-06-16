@@ -4,13 +4,13 @@ permalink: /misc/photos.html
 title: Photo Collections
 ---
 ### Jun. 2023
-##### Forest in UDS Campus.
+##### Forest in UDS Campus
 ![](images/photo_2023-06-10_17-47-06.jpg)
 
 <br><br>
 
 ### Mar. 2023
-##### Before the storm.
+##### Before the storm
 ![](images/photo_2023-06-10_18-57-04.jpg)
 
 <br><br>
@@ -38,7 +38,7 @@ title: Photo Collections
 <br><br>
 
 ### May 2022
-##### Absurd corner in a supermarket.
+##### Absurd corner in a supermarket
 ![](images/photo_2023-06-10_23-36-26.jpg)
 
 <br><br>
@@ -60,22 +60,30 @@ title: Photo Collections
 <br><br>
 
 ### Jul. 2021
+##### Summer in Clausthal
 ![](images/photo_2023-06-10_23-03-19.jpg)
 
 <br><br>
 
 ### Jun. 2021
-##### Summer in Clausthal.
 ![](images/photo_2023-06-10_23-05-28.jpg)
 
 <br><br>
 
 ### Feb. 2021
+##### A touch of hometown
+###### [friend took this photo for me]
+![](images/photo_2023-06-16_21-00-12.jpg)
+
+<br><br>
+
+### Jan. 2021
 ![](images/photo_2023-06-10_23-00-04.jpg)
 
 <br><br>
 
 ### Oct. 2019
+###### [friend took this photo for me]
 ![](images/photo_2023-06-10_22-58-49.jpg)
 
 <br><br>
