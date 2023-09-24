@@ -16,7 +16,7 @@ Security testing and Verification
 
 I'm on the lookout for any opportunities to do some research - internships, research assistant, or anything else. Just drop me an email if there's a possibility :D 
 
-Email: (λx.λy.x00001@stud.uni-y.de) (zhwu) (saarland)
+Email: (λx. λy. x00001@stud.uni-y.de) (zhwu) (saarland)
 
 If you're curious about my life, here are my [hobbies].
 
