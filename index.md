@@ -7,7 +7,7 @@ permalink: /
 
 Hi, here is Zheyuan! 
 
-I'm a computer science bachlor student at [Saarland University], and I'm on a journey to discover my research passions. Here are the areas I'm currently intrigued by: 
+I'm a computer science bachelor student at [Saarland University], and I'm on a journey to discover my research passions. Here are the areas I'm currently intrigued by: 
 Type system, 
 Program analysis and Automated debugging, 
 Security testing and Verification
