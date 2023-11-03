@@ -3,7 +3,7 @@ layout: page
 title: Hobbies
 permalink: /misc/
 ---
-###### Thanks for curiosity and interest :)
+###### Thanks for curiosity :)
 
 ### Photography
 Memories, Emotions, and Who I Am. 
@@ -12,11 +12,11 @@ I never care about devices, for me a mobile phone is the best choice. -->
 [photo collections](photos.html)
 
 ### And something I love and would recommend ...
-Films : The French Dispatch 
-A book of short stories: Opowiadania bizarne (“Tales of the Bizarre”), by Olga Tokarczuk 
-Games: Disco Elysium 
-Anime: 進撃の巨人 (Attack on Titan) 
- 
+Films : The French Dispatch    
+A book of short stories: Opowiadania bizarne (“Tales of the Bizarre”), by Olga Tokarczuk    
+Games: Disco Elysium    
+Anime: 進撃の巨人 (Attack on Titan)    
+
 
 <!-- ### Cooking and tasting delicacies
 For me food is one of the most important things in life and cooking it myself or going to a restaurant is both great. I prefer Asian food, but I'm very open to new tasting experiences.  
