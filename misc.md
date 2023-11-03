@@ -6,7 +6,7 @@ permalink: /misc/
 ###### Thanks for curiosity :)
 
 ### Photography
-Memories, Emotions, and Who I Am. 
+Memories, Emotions, and Who I Am.     
 <!-- Photography for me is a record of emotions. I have always been overly concerned with some of the trivial details of life that are full of beauty, so I rely on my intuition to record them.  
 I never care about devices, for me a mobile phone is the best choice. -->
 [photo collections](photos.html)
