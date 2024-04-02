@@ -5,7 +5,7 @@ permalink: /
 ---
 {% include image.html url="images/myphoto.jpg" width="200px" align="right" %}
 
-Hi, here is Zheyuan! 
+Hey, here is Zheyuan! 
 
 I'm a computer science bachelor student at [Saarland University], and I'm on a journey to discover my research passions. I'm broadly interested in these topics: 
 language design,
