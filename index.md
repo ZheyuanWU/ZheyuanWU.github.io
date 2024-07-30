@@ -18,7 +18,7 @@ testing and verification
 
 Email: (λx. λy. x00001@stud.uni-y.de) (zhwu) (saarland)
 
-If you are tired, take a look at [Baloo].
+If you are tired, take a look at [Baloo](baloo.html).
 If you're curious more about me, here are my [hobbies].
 
 [Saarland University]: https://saarland-informatics-campus.de/
@@ -27,4 +27,4 @@ If you're curious more about me, here are my [hobbies].
 
 [hobbies]: /misc/
 
-[Baloo]: /baloo/
+<!-- [Baloo]: /baloo/ -->
