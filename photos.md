@@ -4,6 +4,7 @@ permalink: /misc/photos.html
 title: Photo Collections
 ---
 ### Aug. 2024
+##### 🧠☁️
 ![](images/PXL_20240826_133603688.jpg)
 
 <br><br>
