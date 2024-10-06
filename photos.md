@@ -4,23 +4,23 @@ permalink: /misc/photos.html
 title: Photo Collections
 ---
 ### Aug. 2024
-![](PXL_20240826_133603688.jpg)
+![](images/PXL_20240826_133603688.jpg)
 
 <br><br>
 
 ### Aug. 2023
-![](PXL_20230824_181942345.jpg)
+![](images/PXL_20230824_181942345.jpg)
 
 <br><br>
 
 ### Aug. 2023
 ##### Mensa UDS
-![](PXL_20230804_115502344.jpg)
+![](images/PXL_20230804_115502344.jpg)
 
 <br><br>
 
 ### July 2023
-![](PXL_20230708_183226473.jpg)
+![](images/PXL_20230708_183226473.jpg)
 
 <br><br>
 
