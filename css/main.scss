@@ -27,13 +27,16 @@ $grey-vdark: #222;
 $blue:       #0091ed;
 $orange:     #ca6c18;
 $red:        #b6321c;
+$teal:  #008080;
+$green: #367588;
+
 
 $background:        $white;
 $dark-background:   darken($background, 5%);
 $text-color:        $grey-vdark;
 $text-light-color:  $grey;
-$url-color:         $red;
-$url-hover-color:   $orange;
+$url-color:         $teal;
+$url-hover-color:   $green;
 $header-text-color: $text-light-color;
 $header-hover-color:$text-color;
 $header-hover-url:  $url-color;
