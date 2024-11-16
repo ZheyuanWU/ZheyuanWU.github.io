@@ -19,8 +19,8 @@ testing and verification
 (λx. λy. x00001@stud.uni-y.de) (zhwu) (saarland)
 
 ### Misc.
-- If you are tired, take a look at [Baloo](baloo.html) :)
-- [More about my life](/misc/).
+- If you are tired, take a look at [Baloo](baloo.html) 🐈
+- [More about my life](/misc/)
 
 
 

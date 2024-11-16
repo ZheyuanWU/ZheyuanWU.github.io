@@ -1,9 +1,9 @@
 ---
 layout: page
-title: Hobbies
+title: 
 permalink: /misc/
 ---
-###### Thanks for curiosity :)
+<!-- ###### Thanks for curiosity :) -->
 
 ### Photography
 Memories, Emotions, and Who I Am.     
@@ -11,7 +11,7 @@ Memories, Emotions, and Who I Am.
 I never care about devices, for me a mobile phone is the best choice. -->
 [photo collections](photos.html)
 
-### And something I love and would recommend ...
+### Something I love and would recommend ...
 Films : The French Dispatch    
 A book of short stories: Opowiadania bizarne (“Tales of the Bizarre”), by Olga Tokarczuk    
 Games: Disco Elysium    
