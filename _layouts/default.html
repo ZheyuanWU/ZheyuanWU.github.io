@@ -1,6 +1,29 @@
 <!DOCTYPE html>
 <html>
 
+  <!-- Function for randomly selecting an image -->
+  <script>
+    // Define the list of images
+    const images = [
+        "/images/baloo/1.jpg",
+        "/images/baloo/2.jpg",
+        // "/assets/images/photo3.jpg"
+    ];
+
+    // Randomly select an image
+    const randomImage = images[Math.floor(Math.random() * images.length)];
+
+    // Set the selected image as the source for the target element or background
+    document.addEventListener("DOMContentLoaded", () => {
+        const imgElement = document.getElementById("random-image");
+        if (imgElement) {
+            imgElement.src = randomImage; // Set the image source
+        }
+    });
+  </script>
+
+
+
   {% include head.html %}
 
   <body>
