@@ -6,7 +6,7 @@ permalink: /
 {% include image.html url="images/myphoto/splash2024-light.jpeg" width="200px" align="right" %}
 
 Hey! 
-I'm a computer science bachelor student at [Saarland University], and I'm on a journey to discover my research passions. 
+I'm currently a computer science undergraduate at [Saarland University], and I'm on a journey to discover my research passions. 
 
 **Areas of interests :** 
 program analysis, 
@@ -24,9 +24,8 @@ and human factors in above technologies.
 
 
 
-
 ### Misc.
-- If you are tired, take a look at [Baloo](baloo.html) 🐈
+- Need a break? Take a look at [Baloo](baloo.html) 🐈
 - [More about my life](/misc/)
 
 
