@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /baloo.html
-title: Hey, here is Baloo!
+title: Random Baloo!
 ---
 
 <!-- ![](images/baloo/2.jpg) -->

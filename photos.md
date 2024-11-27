@@ -3,9 +3,27 @@ layout: page
 permalink: /misc/photos.html
 title: Photo Collections
 ---
+### Nov. 2024
+##### Pigeonhole? in US
+![](images/PXL_20241102_035034907.jpg)
+
+### Oct. 2024
+##### summer days in Lausanne
+![](images/retouch_2024101317055724.jpg)
+![](images/retouch_2024101317121168.jpg)
+![](images/retouch_2024101317085423.jpg)
+
+<br><br>
+
 ### Aug. 2024
 ##### 🧠☁️
 ![](images/PXL_20240826_133603688.jpg)
+
+<br><br>
+
+### May 2024
+##### home 
+![](images/PXL_20240520_111524808.jpg)
 
 <br><br>
 
@@ -31,13 +49,13 @@ title: Photo Collections
 <br><br>
 
 ### Jun. 2023
-##### Forest in UDS Campus
+##### forest in UDS Campus
 ![](images/photo_2023-06-10_17-47-06.jpg)
 
 <br><br>
 
 ### Mar. 2023
-##### Before the storm
+##### before the storm
 ![](images/photo_2023-06-10_18-57-04.jpg)
 
 <br><br>
@@ -61,7 +79,7 @@ title: Photo Collections
 <br><br>
 
 ### Jan. 2023
-##### Fire is the most fascinating element
+##### Fire!
 ![](images/photo_2023-06-10_23-38-40.jpg)
 
 <br><br>
@@ -72,7 +90,7 @@ title: Photo Collections
 <br><br>
 
 ### May 2022
-##### Absurd corner in a supermarket
+##### absurd corner in a supermarket
 ![](images/photo_2023-06-10_23-36-26.jpg)
 
 <br><br>
@@ -94,7 +112,7 @@ title: Photo Collections
 <br><br>
 
 ### Jul. 2021
-##### Summer in Clausthal
+##### summer in Clausthal
 ![](images/photo_2023-06-10_23-03-19.jpg)
 
 <br><br>
@@ -105,7 +123,7 @@ title: Photo Collections
 <br><br>
 
 ### Feb. 2021
-##### A touch of hometown
+##### a touch of hometown
 ###### [friend took this photo for me]
 ![](images/photo_2023-06-16_21-00-12.jpg)
 
@@ -123,6 +141,6 @@ title: Photo Collections
 <br><br>
 
 ### Feb. 2019
-##### A fire-related ceremony in 2019
+##### a fire-related ceremony in 2019
 ![](images/photo_2023-06-10_22-56-04.jpg)
 
