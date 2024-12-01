@@ -1,0 +1,3 @@
+[submodule "LifeCalendar"]
+	path = LifeCalendar
+	url = https://github.com/ZheyuanWU/LifeCalendar.git
