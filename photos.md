@@ -4,6 +4,12 @@ permalink: /misc/photos.html
 title: Photo Collections
 ---
 ### Nov. 2024
+##### Trees from office window
+![](images/PXL_20241122_134116683.MP.jpg)
+![](images/PXL_20241126_145854664.jpg)
+
+
+### Nov. 2024
 ##### Pigeonhole? in US
 ![](images/PXL_20241102_035034907.jpg)
 
