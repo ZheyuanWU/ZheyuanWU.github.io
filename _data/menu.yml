@@ -1,2 +1,6 @@
+# The place to specify the menu items on the top right corner of the site.
 # - title: "Misc"
 #   href: "/misc/"
+
+# - title: "LifeCalendar"
+#   href: "LifeCalendar/index.html"
