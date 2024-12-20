@@ -3,58 +3,14 @@
 
   <!-- Function for randomly selecting an image -->
   <script>
-    // Define the list of images
-    const images = [
-        "/images/baloo/1.jpg",
-        "/images/baloo/2.jpg",
-        "/images/baloo/3.jpg",
-        "/images/baloo/4.jpg",
-        "/images/baloo/5.jpg",
-        "/images/baloo/6.jpg",
-        "/images/baloo/7.jpg",
-        "/images/baloo/8.jpg",
-        "/images/baloo/9.jpg",
-        "/images/baloo/10.jpg",
-        "/images/baloo/11.jpg",
-        "/images/baloo/12.jpg",
-        "/images/baloo/13.jpg",
-        "/images/baloo/14.jpg",
-        "/images/baloo/15.jpg",
-        "/images/baloo/16.jpg",
-        "/images/baloo/17.jpg",
-        "/images/baloo/18.jpg",
-        "/images/baloo/19.jpg",
-        "/images/baloo/20.jpg",
-        "/images/baloo/21.jpg",
-        "/images/baloo/22.jpg",
-        "/images/baloo/23.jpg",
-        "/images/baloo/24.jpg",
-        "/images/baloo/25.jpg",
-        "/images/baloo/26.jpg",
-        "/images/baloo/27.jpg",
-        "/images/baloo/28.jpg",
-        "/images/baloo/29.jpg",
-        "/images/baloo/30.jpg",
-        "/images/baloo/31.jpg",
-        "/images/baloo/32.jpg",
-        "/images/baloo/33.jpg",
-        "/images/baloo/34.jpg",
-        "/images/baloo/35.jpg",
-        "/images/baloo/36.jpg",
-        "/images/baloo/37.jpg",
-        "/images/baloo/38.jpg",
-        "/images/baloo/39.jpg",
-        "/images/baloo/40.jpg",
-    ];
-
-    // Randomly select an image
-    const randomImage = images[Math.floor(Math.random() * images.length)];
+    const MAX_ID = 40; // Changeable, The maximum image ID
+    const randomID = Math.floor(Math.random() * MAX_ID); // Randomly select an image ID
 
     // Set the selected image as the source for the target element or background
     document.addEventListener("DOMContentLoaded", () => {
         const imgElement = document.getElementById("random-image");
         if (imgElement) {
-            imgElement.src = randomImage; // Set the image source
+            imgElement.src = "/misc/images/baloo/" + String(randomID) + ".jpg"; // Set the image source
         }
     });
   </script>
