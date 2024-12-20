@@ -2,11 +2,15 @@
 layout: page
 title: Zheyuan (Joann) Wu
 permalink: /
-workshops:
+research:
     - title:   "Kawa: An Abstract Language for Scalable and Variable Detection of Spectre Vulnerabilities"
       author:  "Zheyuan Wu, Haoyi Zeng, Aaron Bies"
       conference: "SRC SPLASH 2024 🥉(3rd place in the undergraduate category)"
       url:     "https://dl.acm.org/doi/10.1145/3689491.3689971"
+
+    - title:   "Expressing and Checking Statistical Assumptions"
+      author:  "Alexi Turcotte, Zheyuan Wu"
+      conference: "under review"
 ---
 {% include image.html url="myphoto/splash2024-light.jpeg" width="200px" align="right" %}
 
@@ -28,7 +32,7 @@ and human factors in above technologies.
 ### <span class="title-style"> Research Experence </span>
 <hr class="title-line">
 
-{% for pub in page.workshops %}
+{% for pub in page.research %}
 <div style="display: flex; align-items: center; margin-bottom: 20px;">
   {% if pub.image %}
     <div style="margin-right: 20px;">
