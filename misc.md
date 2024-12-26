@@ -12,7 +12,7 @@ I never care about devices, for me a mobile phone is the best choice. -->
 
 
 ### Something I love and would recommend ...
-📽️ Film : The French Dispatch    
+📽️ Film : Yi Yi, The French Dispatch
 📖 Book : Opowiadania bizarne (“Tales of the Bizarre”), by Olga Tokarczuk    
 🎮 Game: Disco Elysium    
 🎴 Anime: 進撃の巨人 (Attack on Titan)    
