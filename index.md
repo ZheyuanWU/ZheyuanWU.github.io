@@ -68,7 +68,7 @@ and human factors in above technologies.
 
 ### <span class="title-style">Teaching</span>
 <hr class="title-line">
-- <span style="font-size: 0.9em;"> Saarland University: [**Mathematics for Computer Scientists I**](https://cms.sic.saarland/mfi1_mfcs1_wise2223/) (2023)</span><br />
+- <span style="font-size: 0.9em;"> Teaching Assistant at Saarland University: [**Mathematics for Computer Scientists I**](https://cms.sic.saarland/mfi1_mfcs1_wise2223/) (2023)</span><br />
 
 
 <!-- ---
