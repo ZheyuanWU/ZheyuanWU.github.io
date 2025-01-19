@@ -1,8 +1,9 @@
 ---
 layout: page
-title: 
+title: MISC
 permalink: /misc/
 ---
+
 ### [🗓️](LifeCalendar/index.html)
 
 ### Photography
@@ -12,9 +13,9 @@ I never care about devices, for me a mobile phone is the best choice. -->
 
 
 ### Something I love and would recommend ...
-📽️ Film : Yi Yi, The French Dispatch
-📖 Book : Opowiadania bizarne (“Tales of the Bizarre”), by Olga Tokarczuk    
-🎮 Game: Disco Elysium    
+📽️ Film : Yi Yi, The French Dispatch 
+📖 Book : Opowiadania bizarne (“Tales of the Bizarre”) by Olga Tokarczuk    
+🎮 Game: Disco Elysium     
 🎴 Anime: 進撃の巨人 (Attack on Titan)    
 
 <!-- ### Cooking and tasting delicacies
@@ -22,5 +23,5 @@ For me food is one of the most important things in life and cooking it myself or
 todo:  
 I plan to put some of my usual recipes here, as well as some restaurant recommendations (mainly in Saarbrücken) -->
 
-### Design
-I've had an interest in design before, especially collage, see some of the [projects](https://wuzheyuanper.wixsite.com/home) I've made.
+<!-- ### Design -->
+<!-- I've had an interest in design before, especially collage, see some of the [projects](https://wuzheyuanper.wixsite.com/home) I've made. -->
