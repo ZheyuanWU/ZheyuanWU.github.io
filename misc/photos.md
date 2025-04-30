@@ -6,7 +6,7 @@ title: Photo Collections
 ### Nov. 2024
 ##### Trees from office window
 ![](images/PXL_20241122_134116683.MP.jpg)
-![](images/PXL_20241126_145854664.jpg)
+<!-- ![](images/PXL_20241126_145854664.jpg) -->
 
 
 ### Nov. 2024

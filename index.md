@@ -10,12 +10,15 @@ research:
 
     - title:   "Expressing and Checking Statistical Assumptions"
       author:  "Alexi Turcotte, Zheyuan Wu"
-      conference: "under review"
+      conference: "FSE 2025"
+      url:  "https://conf.researchr.org/details/fse-2025/fse-2025-research-papers/93/Expressing-and-Checking-Statistical-Assumptions"
 ---
 {% include image.html url="myphoto/splash2024-light.jpeg" width="200px" align="right" %}
 
 Hey! 
 I'm currently a computer science undergraduate at [Saarland University], and I'm on a journey to discover my research passions. 
+<!-- **Update :**
+I'll be a CS PhD Student starting Fall 2025 at Brown University! -->
 
 **Areas of interests :** 
 program analysis, 
