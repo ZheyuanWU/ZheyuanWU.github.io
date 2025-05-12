@@ -13,12 +13,14 @@ research:
       conference: "FSE 2025"
       url:  "https://conf.researchr.org/details/fse-2025/fse-2025-research-papers/93/Expressing-and-Checking-Statistical-Assumptions"
 ---
-{% include image.html url="myphoto/baloo_home2025.jpeg" width="200px" align="right" %}
+{% include image.html url="myphoto/baloo_home2025.jpg" width="200px" align="right" %}
 
-Hey! 
 I'm currently a computer science undergraduate at [Saarland University], and I'm on a journey to discover my research passions. 
 <!-- **Update :**
 I'll be a CS PhD Student starting Fall 2025 at Brown University! -->
+
+📬 (λx. λy. x00001@stud.uni-y.de) (zhwu) (saarland)
+<!-- (λ<span style="color: brown;">x</span>. λ<span style="color: brown;">y</span>. <span style="color: brown;">x</span>00001@stud.uni-<span style="color: brown;">y</span>.de) (<span style="color: brown;">zhwu</span>) (<span style="color: brown;">saarland</span>) -->
 
 **Areas of interests :** 
 program analysis, 
@@ -26,14 +28,21 @@ testing and verification,
 formal methods in security, 
 and human factors in above technologies.
 
-📬
-(λx. λy. x00001@stud.uni-y.de) (zhwu) (saarland)
-<!-- (λ<span style="color: brown;">x</span>. λ<span style="color: brown;">y</span>. <span style="color: brown;">x</span>00001@stud.uni-<span style="color: brown;">y</span>.de) (<span style="color: brown;">zhwu</span>) (<span style="color: brown;">saarland</span>) -->
+### Upcoming Events
+<!-- - (will attend) SuRI@EPFL 2025!
+- (will attend) FSE 2025 in Trondheim 🇳🇴
+- (will attend) PLISS 2025 in Bertinoro 🇮🇹
+- (attened) SPLASH 2024 -->
+
+- SuRI@EPFL 2025!
+- FSE 2025 in Trondheim 🇳🇴
+- PLISS 2025 in Bertinoro 🇮🇹
 
 <!-- ----
 ### Research Experence -->
 ### <span class="title-style"> Research Experence </span>
 <hr class="title-line">
+
 
 {% for pub in page.research %}
 <div style="display: flex; align-items: center; margin-bottom: 20px;">
@@ -64,6 +73,7 @@ and human factors in above technologies.
   </div>
 </div>
 {% endfor %}
+
 
 
 <!-- ---
