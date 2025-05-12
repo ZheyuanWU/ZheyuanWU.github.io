@@ -13,7 +13,7 @@ research:
       conference: "FSE 2025"
       url:  "https://conf.researchr.org/details/fse-2025/fse-2025-research-papers/93/Expressing-and-Checking-Statistical-Assumptions"
 ---
-{% include image.html url="myphoto/splash2024-light.jpeg" width="200px" align="right" %}
+{% include image.html url="myphoto/baloo_home2025.jpeg" width="200px" align="right" %}
 
 Hey! 
 I'm currently a computer science undergraduate at [Saarland University], and I'm on a journey to discover my research passions. 
@@ -22,13 +22,13 @@ I'll be a CS PhD Student starting Fall 2025 at Brown University! -->
 
 **Areas of interests :** 
 program analysis, 
-formal methods in security, 
 testing and verification,
+formal methods in security, 
 and human factors in above technologies.
 
 📬
-<!-- (λx. λy. x00001@stud.uni-y.de) (zhwu) (saarland) -->
-(λ<span style="color: brown;">x</span>. λ<span style="color: brown;">y</span>. <span style="color: brown;">x</span>00001@stud.uni-<span style="color: brown;">y</span>.de) (<span style="color: brown;">zhwu</span>) (<span style="color: brown;">saarland</span>)
+(λx. λy. x00001@stud.uni-y.de) (zhwu) (saarland)
+<!-- (λ<span style="color: brown;">x</span>. λ<span style="color: brown;">y</span>. <span style="color: brown;">x</span>00001@stud.uni-<span style="color: brown;">y</span>.de) (<span style="color: brown;">zhwu</span>) (<span style="color: brown;">saarland</span>) -->
 
 <!-- ----
 ### Research Experence -->
