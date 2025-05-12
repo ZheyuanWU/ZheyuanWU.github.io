@@ -3,15 +3,14 @@ layout: page
 title: Zheyuan (Joann) Wu
 permalink: /
 research:
-    - title:   "Kawa: An Abstract Language for Scalable and Variable Detection of Spectre Vulnerabilities"
-      author:  "Zheyuan Wu, Haoyi Zeng, Aaron Bies"
-      conference: "SRC SPLASH 2024 🥉(3rd place in the undergraduate category)"
-      url:     "https://dl.acm.org/doi/10.1145/3689491.3689971"
-
     - title:   "Expressing and Checking Statistical Assumptions"
       author:  "Alexi Turcotte, Zheyuan Wu"
       conference: "FSE 2025"
       url:  "https://conf.researchr.org/details/fse-2025/fse-2025-research-papers/93/Expressing-and-Checking-Statistical-Assumptions"
+    - title:   "Kawa: An Abstract Language for Scalable and Variable Detection of Spectre Vulnerabilities"
+      author:  "Zheyuan Wu, Haoyi Zeng, Aaron Bies"
+      conference: "SRC SPLASH 2024 🥉(3rd place in the undergraduate category)"
+      url:     "https://dl.acm.org/doi/10.1145/3689491.3689971"
 ---
 {% include image.html url="myphoto/baloo_home2025.jpg" width="200px" align="right" %}
 
