@@ -1,8 +1,8 @@
 ---
 layout: page
-title: Zheyuan (Joann) Wu
+title: Zheyuan Wu
 permalink: /
-research:
+pubs:
     - title:   "Expressing and Checking Statistical Assumptions"
       author:  "Alexi Turcotte, Zheyuan Wu"
       conference: "FSE 2025"
@@ -14,6 +14,10 @@ research:
 ---
 {% include image.html url="myphoto/baloo_home2025.jpg" width="200px" align="right" %}
 
+<p style="font-size: 1.1rem; margin-top: 0.5em;">
+  Joann &nbsp;|&nbsp; <span lang="zh">哲苑</span> <span style="font-family: serif;">zhé yuàn</span>
+</p>
+
 I'm currently a computer science undergraduate at [Saarland University], and I'm on a journey to discover my research passions. 
 <!-- **Update :**
 I'll be a CS PhD Student starting Fall 2025 at Brown University! -->
@@ -24,26 +28,21 @@ I'll be a CS PhD Student starting Fall 2025 at Brown University! -->
 **Areas of interests :** 
 program analysis, 
 testing and verification,
-formal methods in security, 
-and human factors in above technologies.
+human factors in formal methods.
 
-### Upcoming Events
-<!-- - (will attend) SuRI@EPFL 2025!
-- (will attend) FSE 2025 in Trondheim 🇳🇴
-- (will attend) PLISS 2025 in Bertinoro 🇮🇹
-- (attened) SPLASH 2024 -->
-
+<!-- ### Upcoming Events
 - SuRI@EPFL 2025!
 - FSE 2025 in Trondheim 🇳🇴
 - PLISS 2025 in Bertinoro 🇮🇹
+-->
 
 <!-- ----
 ### Research Experence -->
-### <span class="title-style"> Research Experence </span>
+### <span class="title-style"> Research Papers </span>
 <hr class="title-line">
 
 
-{% for pub in page.research %}
+{% for pub in page.pubs %}
 <div style="display: flex; align-items: center; margin-bottom: 20px;">
   {% if pub.image %}
     <div style="margin-right: 20px;">
@@ -72,7 +71,6 @@ and human factors in above technologies.
   </div>
 </div>
 {% endfor %}
-
 
 
 <!-- ---
