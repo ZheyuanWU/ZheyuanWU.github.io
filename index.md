@@ -19,7 +19,7 @@ pubs:
 
 <div style="overflow: hidden; margin-bottom: 1em;">
   <div style="float: right; margin-left: 1.5em;">
-    {% include image.html url="myphoto/Zheyuan_20250511.jpg" width="120px" %}
+    {% include image.html url="myphoto/Zheyuan_20250511.JPG" width="120px" %}
   </div>
 
   <p style="font-size: 1.1rem; margin-top: 0.2em;">
@@ -29,19 +29,18 @@ pubs:
 
   <p>
     Hi 👋, I'm currently a computer science undergraduate at 
-    <a href="https://www.uni-saarland.de/en/home.html">Saarland University</a>, 
-    working with <a href="https://alexiturcotte.com/">Alexi Turcotte</a> at CISPA as a research assistant. 
-    I'll soon begin my PhD in the <a href="https://cel.cs.brown.edu">CEL Lab</a>, 
-    advised by <a href="https://willcrichton.net/">Will Crichton</a>.<br />
+    <a href="https://saarland-informatics-campus.de/">Saarland University</a>, 
+    working with <a href="https://reallytg.github.io/">Alexi Turcotte</a> at CISPA as a research assistant. 
+    I'll soon begin my PhD in the <a href="https://cel.cs.brown.edu">Cog­ni­tive En­gi­neer­ing Lab</a> at Brown Uni­ver­si­ty, advised by <a href="https://willcrichton.net/">Will Crichton</a>.<br />
     I'm on a journey to discover my research passions :)
   </p>
 
   <p style="margin-top: 0.8em;">
-    📬 <code>(λx. λy. x00001@stud.uni-y.de) (zhwu) (saarland)</code>
+    📬 (λx. λy. x00001@stud.uni-y.de) (zhwu) (saarland)
   </p>
 
   <p>
-    <strong>Areas of interest:</strong>
+    <strong>Areas of interest:</strong><br />
     human factors in formal methods,
     testing and verification,
     program analysis.
@@ -153,6 +152,6 @@ I'm on a journey to discover my research passions :) -->
 
 
 [Saarland University]: https://saarland-informatics-campus.de/
-[CEL Lab]: https://cel.cs.brown.edu
+[Cog­ni­tive En­gi­neer­ing Lab]: https://cel.cs.brown.edu
 [Will Crichton]: https://willcrichton.net/
 [Alexi Turcotte]: https://reallytg.github.io/
