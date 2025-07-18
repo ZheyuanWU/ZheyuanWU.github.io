@@ -5,20 +5,32 @@ permalink: /
 pubs:
     - title:   "Expressing and Checking Statistical Assumptions"
       author:  "Alexi Turcotte, Zheyuan Wu"
-      conference: "FSE 2025"
+      conference: "FSE"
+      year: "2025"
       url:  "https://conf.researchr.org/details/fse-2025/fse-2025-research-papers/93/Expressing-and-Checking-Statistical-Assumptions"
+      award: "⭐ Distinguished Paper"
     - title:   "Kawa: An Abstract Language for Scalable and Variable Detection of Spectre Vulnerabilities"
       author:  "Zheyuan Wu, Haoyi Zeng, Aaron Bies"
-      conference: "SRC SPLASH 2024 🥉(3rd place in the undergraduate category)"
+      conference: "SRC SPLASH "
+      year: "2024"
+      award: "🥉 3rd place in the undergraduate category"
       url:     "https://dl.acm.org/doi/10.1145/3689491.3689971"
 ---
-{% include image.html url="myphoto/baloo_home2025.jpg" width="200px" align="right" %}
+{% include image.html url="myphoto/Zheyuan_20250511.jpg" width="200px" align="right" %}
 
 <p style="font-size: 1.1rem; margin-top: 0.5em;">
-  Joann &nbsp;|&nbsp; <span lang="zh">哲苑</span> <span style="font-family: serif;">zhé yuàn</span>
+  <!-- Joann &nbsp;|
+  &nbsp;  -->
+  <span lang="zh">哲苑</span> 
+  <span style="font-family: serif;">zhé yuàn</span>
+  <!-- /ʈʂɤˊ ɥœnˋ/ -->
 </p>
 
-I'm currently a computer science undergraduate at [Saarland University], and I'm on a journey to discover my research passions. 
+Hi👋, I'm currently a computer science undergraduate at [Saarland University],
+working with [Alexi Turcotte] at CISPA as research assistant. 
+I will soon begin my PhD  in the [CEL Lab], 
+advised by [Will Crichton]. <br />
+I'm on a journey to discover my research passions :)
 <!-- **Update :**
 I'll be a CS PhD Student starting Fall 2025 at Brown University! -->
 
@@ -26,9 +38,9 @@ I'll be a CS PhD Student starting Fall 2025 at Brown University! -->
 <!-- (λ<span style="color: brown;">x</span>. λ<span style="color: brown;">y</span>. <span style="color: brown;">x</span>00001@stud.uni-<span style="color: brown;">y</span>.de) (<span style="color: brown;">zhwu</span>) (<span style="color: brown;">saarland</span>) -->
 
 **Areas of interests :** 
-program analysis, 
+human factors in formal methods,
 testing and verification,
-human factors in formal methods.
+program analysis.
 
 <!-- ### Upcoming Events
 - SuRI@EPFL 2025!
@@ -42,7 +54,7 @@ human factors in formal methods.
 <hr class="title-line">
 
 
-{% for pub in page.pubs %}
+<!-- {% for pub in page.pubs %}
 <div style="display: flex; align-items: center; margin-bottom: 20px;">
   {% if pub.image %}
     <div style="margin-right: 20px;">
@@ -70,9 +82,42 @@ human factors in formal methods.
     {% endif %}
   </div>
 </div>
+{% endfor %} -->
+
+{% for pub in page.pubs %}
+<div style="display: flex; align-items: center; margin-bottom: 20px;">
+  {% if pub.image %}
+    <div style="margin-right: 20px;">
+      {% include image.html url=pub.image caption="" height="100px" align=thumbnail %}
+    </div>
+  {% endif %}
+  <div>
+    {% if pub.url %}
+      <strong style="font-size: 0.9em;"><a href="{% if pub.internal %}{{pub.url | prepend: site.baseurl}}{% else %}{{pub.url}}{% endif %}">{{ pub.title }}</a></strong><br />
+    {% else %}
+      <strong style="font-size: 0.9em;">{{ pub.title }}</strong><br />
+    {% endif %}
+    <span style="font-size: 0.9em;">{{ pub.author | replace: "Zheyuan Wu", "<span style='font-weight: normal; color: #999;'>Zheyuan Wu</span>" }}</span><br />
+    <span style="font-family: Georgia, serif; font-variant: small-caps; font-size: 1.2em;">
+      {{ pub.conference | downcase }}
+      <span style="font-size: 0.75em;"> {{ pub.year }}</span>
+      {% if pub.award %}
+      <span style="font-size: 0.75em; color:rgb(0, 0, 0)"> {{ pub.award | downcase}}</span>
+      {% endif %}
+    </span>
+    {% if pub.note %} <i style="font-size: 0.9em;">({{ pub.note }})</i> {% endif %} 
+    {% if pub.doi %} 
+      <span style="font-size: 0.9em;">[[doi]({{ pub.doi }})]</span> 
+    {% endif %}
+    {% if pub.media %}
+      <br />Media: 
+      {% for article in pub.media %}
+        <a href="{{ article.url }}" target="_blank" style="font-size: 0.9em;">{{ article.name }}</a>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
 {% endfor %}
-
-
 <!-- ---
 ### Teaching -->
 
@@ -93,3 +138,6 @@ human factors in formal methods.
 
 
 [Saarland University]: https://saarland-informatics-campus.de/
+[CEL Lab]: https://cel.cs.brown.edu
+[Will Crichton]: https://willcrichton.net/
+[Alexi Turcotte]: https://reallytg.github.io/
