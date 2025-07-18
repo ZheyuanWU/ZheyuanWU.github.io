@@ -7,46 +7,64 @@ pubs:
       author:  "Alexi Turcotte, Zheyuan Wu"
       conference: "FSE"
       year: "2025"
-      url:  "https://conf.researchr.org/details/fse-2025/fse-2025-research-papers/93/Expressing-and-Checking-Statistical-Assumptions"
+      url: "https://dl.acm.org/doi/10.1145/3729391"
       award: "⭐ Distinguished Paper"
     - title:   "Kawa: An Abstract Language for Scalable and Variable Detection of Spectre Vulnerabilities"
       author:  "Zheyuan Wu, Haoyi Zeng, Aaron Bies"
       conference: "SRC SPLASH "
       year: "2024"
       award: "🥉 3rd place in the undergraduate category"
-      url:     "https://dl.acm.org/doi/10.1145/3689491.3689971"
+      url: "https://dl.acm.org/doi/10.1145/3689491.3689971"
 ---
-{% include image.html url="myphoto/Zheyuan_20250511.jpg" width="200px" align="right" %}
 
-<p style="font-size: 1.1rem; margin-top: 0.5em;">
-  <!-- Joann &nbsp;|
-  &nbsp;  -->
+<div style="overflow: hidden; margin-bottom: 1em;">
+  <div style="float: right; margin-left: 1.5em;">
+    {% include image.html url="myphoto/Zheyuan_20250511.jpg" width="120px" %}
+  </div>
+
+  <p style="font-size: 1.1rem; margin-top: 0.2em;">
+    <span lang="zh">哲苑</span>
+    <span style="font-family: serif;">zhé yuàn</span>
+  </p>
+
+  <p>
+    Hi 👋, I'm currently a computer science undergraduate at 
+    <a href="https://www.uni-saarland.de/en/home.html">Saarland University</a>, 
+    working with <a href="https://alexiturcotte.com/">Alexi Turcotte</a> at CISPA as a research assistant. 
+    I'll soon begin my PhD in the <a href="https://cel.cs.brown.edu">CEL Lab</a>, 
+    advised by <a href="https://willcrichton.net/">Will Crichton</a>.<br />
+    I'm on a journey to discover my research passions :)
+  </p>
+
+  <p style="margin-top: 0.8em;">
+    📬 <code>(λx. λy. x00001@stud.uni-y.de) (zhwu) (saarland)</code>
+  </p>
+
+  <p>
+    <strong>Areas of interest:</strong>
+    human factors in formal methods,
+    testing and verification,
+    program analysis.
+  </p>
+</div>
+
+
+
+<!-- {% include image.html url="myphoto/Zheyuan_20250511.jpg" width="100px" align="right" %} -->
+
+<!-- <p style="font-size: 1.1rem; margin-top: 0.5em;">
   <span lang="zh">哲苑</span> 
   <span style="font-family: serif;">zhé yuàn</span>
-  <!-- /ʈʂɤˊ ɥœnˋ/ -->
-</p>
+  <!-- /ʈʂɤˊ ɥœnˋ/ --> 
 
-Hi👋, I'm currently a computer science undergraduate at [Saarland University],
-working with [Alexi Turcotte] at CISPA as research assistant. 
-I will soon begin my PhD  in the [CEL Lab], 
-advised by [Will Crichton]. <br />
-I'm on a journey to discover my research passions :)
-<!-- **Update :**
-I'll be a CS PhD Student starting Fall 2025 at Brown University! -->
+<!-- Hi 👋, I'm currently a computer science undergraduate at [Saarland University],
+working with [Alexi Turcotte] at CISPA as a research assistant. 
+I'll soon begin my PhD in [CEL Lab], advised by [Will Crichton]. <br />
+I'm on a journey to discover my research passions :) -->
 
-📬 (λx. λy. x00001@stud.uni-y.de) (zhwu) (saarland)
+
 <!-- (λ<span style="color: brown;">x</span>. λ<span style="color: brown;">y</span>. <span style="color: brown;">x</span>00001@stud.uni-<span style="color: brown;">y</span>.de) (<span style="color: brown;">zhwu</span>) (<span style="color: brown;">saarland</span>) -->
 
-**Areas of interests :** 
-human factors in formal methods,
-testing and verification,
-program analysis.
-
-<!-- ### Upcoming Events
-- SuRI@EPFL 2025!
-- FSE 2025 in Trondheim 🇳🇴
-- PLISS 2025 in Bertinoro 🇮🇹
--->
 
 <!-- ----
 ### Research Experence -->
@@ -125,9 +143,6 @@ program analysis.
 <hr class="title-line">
 - <span style="font-size: 0.9em;"> Teaching Assistant at Saarland University: [**Mathematics for Computer Scientists I**](https://cms.sic.saarland/mfi1_mfcs1_wise2223/) (2023)</span><br />
 
-
-<!-- ---
-### Teaching -->
 
 ### Misc.
 <hr class="title-line">
