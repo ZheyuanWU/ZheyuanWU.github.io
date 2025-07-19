@@ -20,6 +20,7 @@ $vsmall-font-size: 0.66em;
 $spacing-unit:     1.5em;
 
 $white:      #fff;
+$SHIRONERI:  #f3f3f2;
 $grey-vlight:#eee;
 $grey-light: #ccc;
 $grey:       #888;
@@ -28,8 +29,19 @@ $grey-vdark: #222;
 $blue:       #0091ed;
 $orange:     #ca6c18;
 $red:        #b6321c;
-$teal:  #008080;
-$green: #00a0a0;
+
+$teal:       #008080;
+$teal-light: #00a0a0;
+$AOTAKE:     #5DAC81;
+$USUAO:      #91B493;
+$IWAICHA:    #6f6f43;
+
+$tan:        #d2b48c;
+$chocolate:  #802F00;
+
+$SHION:      #877892;
+$FUJI-NEZUMI:#a6a5c4;
+
 
 
 $background:        $white;
@@ -37,7 +49,7 @@ $dark-background:   darken($background, 5%);
 $text-color:        $grey-vdark;
 $text-light-color:  $grey;
 $url-color:         $teal;
-$url-hover-color:   $green;
+$url-hover-color:   $AOTAKE;
 $header-text-color: $text-light-color;
 $header-hover-color:$text-color;
 $header-hover-url:  $url-color;

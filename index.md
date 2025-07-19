@@ -13,12 +13,12 @@ pubs:
       author:  "Zheyuan Wu, Haoyi Zeng, Aaron Bies"
       conference: "SRC SPLASH "
       year: "2024"
-      award: "🥉 3rd place in the undergraduate category"
+      award: "🥉 3rd place"
       url: "https://dl.acm.org/doi/10.1145/3689491.3689971"
 ---
 
 <div style="overflow: hidden; margin-bottom: 1em;">
-  <div style="float: right; margin-left: 1.5em;">
+  <div style="float: right; margin-left: 1em;">
     {% include image.html url="myphoto/Zheyuan_20250511.JPG" width="120px" %}
   </div>
 
@@ -75,7 +75,7 @@ pubs:
       {{ pub.conference | downcase }}
       <span style="font-size: 0.75em;"> {{ pub.year }}</span>
       {% if pub.award %}
-      <span style="font-size: 0.75em; color:rgb(0, 0, 0)"> {{ pub.award | downcase}}</span>
+      <span style="font-size: 0.75em; color:#802F00"> {{ pub.award | downcase}}</span>
       {% endif %}
     </span>
     {% if pub.note %} <i style="font-size: 0.9em;">({{ pub.note }})</i> {% endif %} 
