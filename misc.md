@@ -15,7 +15,13 @@ permalink: /misc/
 
 - My first programming classes at Saarland University were built around these two textbooks. They shaped how I think about programming, still my go-to when I need to reset my brain. They’re not very well-known outside Saarland, so leaving them here for whoever’s curious.
     - [Introduction to Functional Programming (with OCaml)](https://www.ps.uni-saarland.de/~smolka/drafts/prog2021.pdf)
-    - [Introduction to Imperative Programming (with RISC-V, C, Java)](https://prog2.de/book/prog2-book.html)
+    - [Introduction to Imperative Programming (with RISC-V, C, Java)](https://prog2.de/book/preface.html)
+    - other great textbooks I encountered at saarland: 
+        - [concurrent programming (pseuCo)](https://book.pseuco.com/#/)
+        - [the fuzzing book](https://www.fuzzingbook.org/beta/index.html)
+        - [the debugging book](https://www.debuggingbook.org/)
+
+<!-- - Stories behind pub [](https://jeffhuang.com/struggle_for_each_paper/) -->
 
 ### Photography
 📷 [Photos](photos.html) about Memories, Emotions, and Who I Am
