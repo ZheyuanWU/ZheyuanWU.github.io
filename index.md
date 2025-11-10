@@ -29,23 +29,25 @@ pubs:
 
   <div style="max-width: 600px; line-height: 1.6;">
     <p>
-      Hi 👋, I'm currently a computer science undergraduate at 
-      <a href="https://saarland-informatics-campus.de/">Saarland University</a>, 
-      working with <a href="https://reallytg.github.io/">Alexi Turcotte</a> at CISPA as a research assistant. 
-      I'll soon begin my PhD in the 
-      <a href="https://cel.cs.brown.edu">Cognitive Engineering Lab</a> at Brown University, 
-      advised by <a href="https://willcrichton.net/">Will Crichton</a>. 
+      Hi 👋, I'm a computer science PhD student in the 
+      <a href="https://cel.cs.brown.edu">Cognitive Engineering Lab</a> at Brown University,
+      advised by <a href="https://willcrichton.net/">Will Crichton</a>.
+      <br />
       I'm on a journey to discover my research passions :)
+      <br />
+      My undergrad was at <a href="https://saarland-informatics-campus.de/">Saarland University</a>, 
+      worked with <a href="https://reallytg.github.io/">Alexi Turcotte</a> at CISPA. 
+
     </p>
     <p style="margin-top: 0.8em;">
-    📬 (λx. λy. x00001@stud.uni-y.de) (zhwu) (saarland)
+    📬 (λx. x@brown.edu) (zheyuan)
     </p>
 
     <p>
-      <strong>Areas of interest:</strong><br />
+      <strong>Research interests:</strong><br />
       human factors in formal methods,
       testing and verification,
-      program analysis.
+      program analysis...
     </p>
   </div>
 </div>
