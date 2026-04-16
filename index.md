@@ -11,7 +11,8 @@ pubs:
       award: "⭐ Distinguished Paper"
     - title:   "Kawa: An Abstract Language for Scalable and Variable Detection of Spectre Vulnerabilities"
       author:  "Zheyuan Wu, Haoyi Zeng, Aaron Bies"
-      conference: "SRC SPLASH "
+      note: "Advised by Jan Reineke <- this amazing prof is hiring PhD students, feel free to reach out!"
+      conference: "SRC SPLASH"
       year: "2024"
       award: "🥉 3rd place"
       url: "https://dl.acm.org/doi/10.1145/3689491.3689971"
@@ -101,8 +102,7 @@ pubs:
 
 ### Misc.
 <hr class="title-line">
-
-- Need a break? Take a look at [Baloo](baloo.html) 🐈
+- Need a break? Meet [Baloo](baloo.html) 🐈
 - [More about my life](/misc/)
 
 
@@ -111,3 +111,4 @@ pubs:
 [Cog­ni­tive En­gi­neer­ing Lab]: https://cel.cs.brown.edu
 [Will Crichton]: https://willcrichton.net/
 [Alexi Turcotte]: https://reallytg.github.io/
+[Jan Reineke]: https://embedded.cs.uni-saarland.de/reineke.php
