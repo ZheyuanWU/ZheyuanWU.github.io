@@ -53,3 +53,15 @@
 .post-link {
     display: block;
 }
+
+.baloo-random {
+    margin: $spacing-unit 0;
+    text-align: center;
+
+    img {
+        display: block;
+        max-height: 70vh;
+        margin: 0 auto;
+        object-fit: contain;
+    }
+}

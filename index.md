@@ -11,7 +11,6 @@ pubs:
       award: "⭐ Distinguished Paper"
     - title:   "Kawa: An Abstract Language for Scalable and Variable Detection of Spectre Vulnerabilities"
       author:  "Zheyuan Wu, Haoyi Zeng, Aaron Bies"
-      note: "Advised by Jan Reineke <- this amazing prof is hiring PhD students, feel free to reach out!"
       conference: "SRC SPLASH"
       year: "2024"
       award: "🥉 3rd place"

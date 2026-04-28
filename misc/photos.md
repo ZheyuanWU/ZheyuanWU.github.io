@@ -149,4 +149,3 @@ title: Photo Collections
 ### Feb. 2019
 ##### a fire-related ceremony in 2019
 ![](images/photo_2023-06-10_22-56-04.jpg)
-

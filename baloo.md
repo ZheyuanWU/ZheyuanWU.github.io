@@ -4,9 +4,41 @@ permalink: /baloo.html
 title: Random Baloo!
 ---
 
-<!-- ![](images/baloo/2.jpg) -->
+{% assign first_baloo = site.data.baloo | first %}
 
-<img id="random-image" src="" alt="Random Image">
+<figure class="baloo-random">
+  <a id="baloo-link" href="{{ first_baloo.src | prepend: site.baseurl }}">
+    <img
+      id="random-image"
+      src="{{ first_baloo.src | prepend: site.baseurl }}"
+      alt="Random Baloo photo"
+      decoding="async"
+      fetchpriority="high">
+  </a>
+</figure>
 
+<script>
+  window.balooPhotos = [
+    {% for photo in site.data.baloo %}
+      {
+        full: "{{ photo.src | prepend: site.baseurl }}",
+        display: "{{ photo.src | prepend: site.baseurl }}"
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
 
-<br><br>
+  (function () {
+    var image = document.getElementById("random-image");
+    var link = document.getElementById("baloo-link");
+    var photos = window.balooPhotos || [];
+
+    function pickPhoto() {
+      if (!photos.length) return;
+      var photo = photos[Math.floor(Math.random() * photos.length)];
+      image.src = photo.display;
+      link.href = photo.full;
+    }
+
+    pickPhoto();
+  }());
+</script>
