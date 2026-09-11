@@ -1,364 +1,605 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
   <title>Life Calendar</title>
   <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #222222;
+      --muted: #8a8a8a;
+      --border: #e2e2e2;
+      --track: #eef0f1;
+      --event-accent: #A349A4;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
     body {
-      margin-top: 0px;
-    }
-
-    #container {
-      width: 80%;
-      margin: 0 auto;
-      line-height: 0px;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Source Sans Pro", "Lato", -apple-system, "San Francisco", "Helvetica Neue", Helvetica, Roboto, "Segoe UI", "Segoe WP", Arial, Ubuntu, sans-serif;
     }
 
-    .day {
-      border-style: solid;
-      border-width: 1px;
-      border-color: darkgray;
-      cursor: default;
-      width: 20px;
-      height: 20px;
-      margin: 1px;
-      line-height: 20px;
-      font-size: 15px;
-      text-align: center;
+    #app {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      padding: 16px 22px 12px;
     }
 
-    .left-margin {
-      position: absolute;
-      left: 5%;
-    }
+    header { flex: 0 0 auto; text-align: center; }
 
     h1 {
-      text-align: center;
-      margin-top: 0px;
-      padding-top: 20px;
-    }
-
-    .detail {
-      display: none;
-      position: absolute;
       margin: 0;
-      background-color: aliceblue;
-      border-width: 2px;
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
     }
 
-    ::-webkit-scrollbar {
-      width: 10px;
-      height: 10px;
-      background-color: #f5f5f5;
+    .tagline { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+    #timeline {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+      overflow: hidden;
+      margin-top: 10px;
     }
 
-    ::-webkit-scrollbar-track {
-      border-radius: 0px;
-      background-color: #F9E4FE;
+    #grid-wrap { display: flex; gap: 6px; }
+
+    #year-axis {
+      position: relative;
+      flex: 0 0 auto;
+      width: 32px;
     }
 
-    ::-webkit-scrollbar-thumb {
-      height: 20px;
-      border-radius: 0px;
-      background-color: #881798;
+    .year-label {
+      position: absolute;
+      left: 0;
+      right: 2px;
+      text-align: right;
+      font-size: 0.6rem;
+      color: var(--muted);
+      transform: translateY(-0.55em);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
     }
 
-    ::-webkit-scrollbar-thumb:hover {
-      background: #A31FBF;
+    #grid {
+      display: grid;
+    }
+
+    .cell {
+      position: relative;
+      border-radius: 1px;
+      cursor: pointer;
+    }
+
+    .cell.has-event {
+      box-shadow: inset 0 0 0 1.3px var(--event-accent);
+    }
+
+    .cell.today {
+      outline: 1.5px solid #111;
+      outline-offset: -1.5px;
+      z-index: 2;
+    }
+
+    .cell .glyph {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    #tooltip {
+      position: fixed;
+      max-width: 260px;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      z-index: 50;
+      pointer-events: none;
+    }
+
+    #tooltip.pinned { border-color: #222; pointer-events: auto; }
+
+    #warnings {
+      position: fixed;
+      bottom: 8px;
+      left: 8px;
+      background: #fff3f0;
+      border: 1px solid #e0a094;
+      color: #9a3b2a;
+      font-size: 0.68rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      z-index: 40;
+      max-width: 320px;
+    }
+
+    #pw-widget {
+      position: fixed;
+      bottom: 6px;
+      right: 8px;
+      font-size: 0.62rem;
+      opacity: 0.3;
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    #pw-widget:hover, #pw-widget:focus-within { opacity: 1; }
+    #pw-widget input { width: 72px; font-size: 0.62rem; }
+    #pw-widget button { font-size: 0.62rem; }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 1.1rem; }
+      #year-axis { width: 26px; }
+      .year-label { font-size: 0.54rem; }
     }
   </style>
 </head>
 
 <body>
+  <div id="app">
+    <header>
+      <h1>LIFE Calendar</h1>
+      <div class="tagline">only once</div>
+    </header>
+    <div id="timeline"></div>
+  </div>
 
-  <h1>LIFE Calendar</h1>
-  <div style="text-align: center;">only once</div><br>
+  <div id="tooltip" hidden></div>
+  <div id="warnings" hidden></div>
 
-  <div id="left-margin"></div>
-  <div id="body"></div>
-  <div id="detail"></div>
-  <center>
-    <input id="password" /><button onclick="setPassword()">set password</button>
-  </center>
+  <div id="pw-widget">
+    <input id="password" placeholder="password" />
+    <button id="pw-btn">set</button>
+  </div>
 
   <script>
-    function setPassword() {
-      const pw = document.getElementById('password').value;
-      document.cookie = `password=${pw};max-age=${365 * 24 * 3600}`;
-      location.reload();
-    }
+    // ---------- config ----------
+    const birth = new Date(1999, 6, 5);
+    const EXPECTED_YEARS = 102;
+    const death = new Date(1999 + EXPECTED_YEARS, 6, 5);
+    const today = new Date();
+
+    const eventFiles = ['./events/overall.html', './events/year2024.html'];
+
+    // Fixed, limited, easy-to-tell-apart palette. Add stages via
+    // events/overall.html using `stage-color="<name>"`; omit it to
+    // auto-assign the next unused color in this order.
+    const PALETTE = [
+      { name: 'amber', hex: '#D9A441' },
+      { name: 'teal', hex: '#2E8B87' },
+      { name: 'coral', hex: '#D9705A' },
+      { name: 'indigo', hex: '#4C5B8C' },
+      { name: 'moss', hex: '#748C54' },
+      { name: 'plum', hex: '#8C5A7C' },
+      { name: 'steel', hex: '#5A7A94' },
+      { name: 'rose', hex: '#B5576F' },
+    ];
+    const PALETTE_MAP = Object.fromEntries(PALETTE.map(p => [p.name, p.hex]));
+
+    // Grid cell units, finest first. The renderer picks the finest one
+    // whose resulting cell size still clears MIN_CELL for the current
+    // viewport — so the grid gets coarser only when it truly has to.
+    const UNITS = [
+      { name: 'week', days: 7 },
+      { name: 'month', days: 30.4368 },
+      { name: 'quarter', days: 91.3105 },
+      { name: 'year', days: 365.2425 },
+    ];
+    const MIN_CELL = 8; // px
+    const GAP = 1.5; // px, gap between grid cells
+
+    // ---------- state ----------
+    let stages = [];        // {start, end, name, color} (ms timestamps)
+    let events = [];        // {date, endDate?, name, color, icon} (ms timestamps)
+    let dataWarnings = [];
+    let stageColorIdx = 0;
+    let password = getCookie('password');
+    let pinnedEl = null;
+    let cellData = [];      // parallel to rendered .cell elements, by index
+
     function getCookie(sKey) {
       return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[-.+*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
     }
-  </script>
 
-  <script>
-    let display_count = 0;
-
-    // $.get(
-    //   "./events.html",
-    //   (res) => {
-    //     let p = new DOMParser();
-    //     p = p.parseFromString(res, 'text/html');
-    //     process_events(p.getElementById('events'));
-    //   }
-    // );
-
-  const eventFiles = ['./events/overall.html', './events/year2024.html'];
-  const promises = eventFiles.map((file) =>
-    $.get(file, (res) => {
-      let p = new DOMParser();
-      const parsedDoc = p.parseFromString(res, 'text/html');
-      process_events(parsedDoc.getElementById('events')); // the id defined on the top of each file
-    })
-  );
-
-  Promise.all(promises).then(() => {
-    console.log("All events loaded and processed.");
-  });
-
-
-    history.scrollRestoration = 'manual';
-    const birth = new Date(1999, 6, 5);
-    const expected_years = 102;
-    const death = new Date(1999 + expected_years, 6, 5);
-    const today = new Date();
-    const password = getCookie('password');
-
-    function getIdxByDate(date) {
-      return Math.floor((date.getTime() - birth.getTime()) / (1000 * 3600 * 24));
-    }
-    function getDateStr(date) {
-      return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-    }
-    function getColor(hue, credit) {
-      return 'hsl(' + hue + ',100%,' + (100 - Math.min(100, credit) / 2) + '%)';
-    }
-
-    let days = [];
-    let dateToDetailsData = {};
-    let detailsContainer = document.getElementById('detail');
-
-    const genDetailEl = (date) => {
-      let detail_el = document.createElement('div');
-      detail_el.className = 'detail';
-      detail_el.innerHTML = date;
-      if (dateToDetailsData[date]) {
-        detail_el.innerHTML += '<br>' + dateToDetailsData[date];
-      }
-      detail_el.id = date;
-      detail_el.clicked = 0;
-      detailsContainer.appendChild(detail_el);
-      return detail_el
+    document.getElementById('pw-btn').onclick = () => {
+      const pw = document.getElementById('password').value;
+      document.cookie = `password=${pw};max-age=${365 * 24 * 3600}`;
+      location.reload();
     };
 
-    const removeDetailEl = (date) => {
-      document.getElementById(date).remove();
-    };
-
-    const onmouseenter = (ev) => {
-      let detail_el = document.getElementById(ev.srcElement.date);
-      if (!detail_el) {
-        detail_el = genDetailEl(ev.srcElement.date);
-      }
-      if (!detail_el.clicked) {
-        detail_el.style.display = 'block';
-        detail_el.style.left = ev.pageX + 10 + 'px';
-        detail_el.style.top = ev.pageY + 1 + 'px';
-        detail_el.style.zIndex = display_count++;
-      }
-    };
-    const onmousemove = (ev) => {
-      let detail_el = document.getElementById(ev.srcElement.date);
-      if (!detail_el.clicked) {
-        detail_el.style.left = ev.pageX + 10 + 'px';
-        detail_el.style.top = ev.pageY + 1 + 'px';
-      }
-    };
-    const onmouseleave = (ev) => {
-      let detail_el = document.getElementById(ev.srcElement.date);
-      if (!detail_el.clicked) {
-        detail_el.remove()
-      }
-    }
-    const onclick = (ev) => {
-      let detail_el = document.getElementById(ev.srcElement.date);
-      if (detail_el.clicked) {
-        detail_el.clicked = 0;
-        detail_el.style.borderStyle = 'none';
-        ev.srcElement.style.borderWidth = '1px';
-        ev.srcElement.style.margin = '1px';
-      } else {
-        detail_el.clicked = 1;
-        detail_el.style.borderStyle = 'solid';
-        ev.srcElement.style.borderWidth = '2px';
-        ev.srcElement.style.margin = '0px';
-      }
+    function warn(msg) {
+      dataWarnings.push(msg);
+      console.error('[LifeCalendar]', msg);
     }
 
-    for (let cur = new Date(+birth); cur < death; cur.setDate(cur.getDate() + 1)) {
-      let el = document.createElement('div');
-      el.className = 'day';
-      if (cur >= today) {
-        el.style.borderColor = '#000';
+    // Strict M/D/YYYY parser: rejects illegal calendar dates (e.g. Feb 31)
+    // instead of silently letting them roll over into a different date.
+    function parseStrictDate(str) {
+      if (!str) return null;
+      const m = str.trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      if (!m) { warn(`Unrecognized date "${str}" (expected M/D/YYYY)`); return null; }
+      const month = +m[1], day = +m[2], year = +m[3];
+      const d = new Date(year, month - 1, day);
+      if (d.getFullYear() !== year || d.getMonth() !== month - 1 || d.getDate() !== day) {
+        warn(`Invalid calendar date "${str}"`);
+        return null;
       }
-      el.date = getDateStr(cur);
-      el.credit = 0;
-      el.no_credit_color = false;
-      el.hue = 180;
-      days.push(el);
-
-      el.onmouseenter = onmouseenter;
-      el.onmousemove = onmousemove;
-      el.onmouseleave = onmouseleave;
-      el.onclick = onclick;
+      return d;
     }
 
-    let container = document.createElement('div');
-    container.id = 'container';
-    for (let wk in days) {
-      container.appendChild(days[wk]);
-    }
-    document.getElementById('body').appendChild(container);
-
-    let cur_age = 0;
-    for (let cur = new Date(+birth); cur < death; cur.setFullYear(cur.getFullYear() + 1)) {
-      let y = days[getIdxByDate(cur)].getBoundingClientRect().top
-        - document.body.getBoundingClientRect().top;
-      let time_label = document.createElement('div');
-      time_label.className = 'left-margin';
-      time_label.style.top = y.toString() + 'px';
-      if (navigator.language === 'zh-CN') {
-        time_label.innerText = cur_age.toString() + ' 岁';
-      } else {
-        time_label.innerText = 'age ' + cur_age.toString();
-      }
-      document.getElementById('left-margin').appendChild(time_label);
-      cur_age++;
+    function fmtDate(ms) {
+      const d = new Date(ms);
+      const pad = n => String(n).padStart(2, '0');
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
     }
 
-    let today_el = days[getIdxByDate(new Date())];
-    today_el.style.borderColor = 'deeppink';
-
-
-
-    function is_emoji(s) {
-      let res = /\u{1F3F4}\u{E0067}\u{E0062}(?:\u{E0077}\u{E006C}\u{E0073}|\u{E0073}\u{E0063}\u{E0074}|\u{E0065}\u{E006E}\u{E0067})\u{E007F}|\u{1F469}\u200D\u{1F469}\u200D(?:\u{1F466}\u200D\u{1F466}|\u{1F467}\u200D[\u{1F466}\u{1F467}])|\u{1F468}(?:\u{1F3FF}\u200D(?:\u{1F91D}\u200D\u{1F468}[\u{1F3FB}-\u{1F3FE}]|[\u{1F33E}\u{1F373}\u{1F37C}\u{1F393}\u{1F3A4}\u{1F3A8}\u{1F3EB}\u{1F3ED}\u{1F4BB}\u{1F4BC}\u{1F527}\u{1F52C}\u{1F680}\u{1F692}\u{1F9AF}-\u{1F9B3}\u{1F9BC}\u{1F9BD}])|\u{1F3FE}\u200D(?:\u{1F91D}\u200D\u{1F468}[\u{1F3FB}-\u{1F3FD}\u{1F3FF}]|[\u{1F33E}\u{1F373}\u{1F37C}\u{1F393}\u{1F3A4}\u{1F3A8}\u{1F3EB}\u{1F3ED}\u{1F4BB}\u{1F4BC}\u{1F527}\u{1F52C}\u{1F680}\u{1F692}\u{1F9AF}-\u{1F9B3}\u{1F9BC}\u{1F9BD}])|\u{1F3FD}\u200D(?:\u{1F91D}\u200D\u{1F468}[\u{1F3FB}\u{1F3FC}\u{1F3FE}\u{1F3FF}]|[\u{1F33E}\u{1F373}\u{1F37C}\u{1F393}\u{1F3A4}\u{1F3A8}\u{1F3EB}\u{1F3ED}\u{1F4BB}\u{1F4BC}\u{1F527}\u{1F52C}\u{1F680}\u{1F692}\u{1F9AF}-\u{1F9B3}\u{1F9BC}\u{1F9BD}])|\u{1F3FC}\u200D(?:\u{1F91D}\u200D\u{1F468}[\u{1F3FB}\u{1F3FD}-\u{1F3FF}]|[\u{1F33E}\u{1F373}\u{1F37C}\u{1F393}\u{1F3A4}\u{1F3A8}\u{1F3EB}\u{1F3ED}\u{1F4BB}\u{1F4BC}\u{1F527}\u{1F52C}\u{1F680}\u{1F692}\u{1F9AF}-\u{1F9B3}\u{1F9BC}\u{1F9BD}])|\u{1F3FB}\u200D(?:\u{1F91D}\u200D\u{1F468}[\u{1F3FC}-\u{1F3FF}]|[\u{1F33E}\u{1F373}\u{1F37C}\u{1F393}\u{1F3A4}\u{1F3A8}\u{1F3EB}\u{1F3ED}\u{1F4BB}\u{1F4BC}\u{1F527}\u{1F52C}\u{1F680}\u{1F692}\u{1F9AF}-\u{1F9B3}\u{1F9BC}\u{1F9BD}])|\u200D(?:\u2764\uFE0F\u200D(?:\u{1F48B}\u200D)?\u{1F468}|[\u{1F468}\u{1F469}]\u200D(?:\u{1F466}\u200D\u{1F466}|\u{1F467}\u200D[\u{1F466}\u{1F467}])|\u{1F466}\u200D\u{1F466}|\u{1F467}\u200D[\u{1F466}\u{1F467}]|[\u{1F468}\u{1F469}]\u200D[\u{1F466}\u{1F467}]|[\u2695\u2696\u2708]\uFE0F|[\u{1F466}\u{1F467}]|[\u{1F33E}\u{1F373}\u{1F37C}\u{1F393}\u{1F3A4}\u{1F3A8}\u{1F3EB}\u{1F3ED}\u{1F4BB}\u{1F4BC}\u{1F527}\u{1F52C}\u{1F680}\u{1F692}\u{1F9AF}-\u{1F9B3}\u{1F9BC}\u{1F9BD}])|(?:\u{1F3FF}\u200D[\u2695\u2696\u2708]|\u{1F3FE}\u200D[\u2695\u2696\u2708]|\u{1F3FD}\u200D[\u2695\u2696\u2708]|\u{1F3FC}\u200D[\u2695\u2696\u2708]|\u{1F3FB}\u200D[\u2695\u2696\u2708])\uFE0F|[\u{1F3FB}-\u{1F3FF}])|\u{1F9D1}(?:[\u{1F3FB}-\u{1F3FF}]\u200D(?:\u{1F91D}\u200D\u{1F9D1}[\u{1F3FB}-\u{1F3FF}]|[\u{1F33E}\u{1F373}\u{1F37C}\u{1F384}\u{1F393}\u{1F3A4}\u{1F3A8}\u{1F3EB}\u{1F3ED}\u{1F4BB}\u{1F4BC}\u{1F527}\u{1F52C}\u{1F680}\u{1F692}\u{1F9AF}-\u{1F9B3}\u{1F9BC}\u{1F9BD}])|\u200D(?:\u{1F91D}\u200D\u{1F9D1}|[\u{1F33E}\u{1F373}\u{1F37C}\u{1F384}\u{1F393}\u{1F3A4}\u{1F3A8}\u{1F3EB}\u{1F3ED}\u{1F4BB}\u{1F4BC}\u{1F527}\u{1F52C}\u{1F680}\u{1F692}\u{1F9AF}-\u{1F9B3}\u{1F9BC}\u{1F9BD}]))|\u{1F469}(?:\u200D(?:\u2764\uFE0F\u200D(?:\u{1F48B}\u200D[\u{1F468}\u{1F469}]|[\u{1F468}\u{1F469}])|[\u{1F33E}\u{1F373}\u{1F37C}\u{1F393}\u{1F3A4}\u{1F3A8}\u{1F3EB}\u{1F3ED}\u{1F4BB}\u{1F4BC}\u{1F527}\u{1F52C}\u{1F680}\u{1F692}\u{1F9AF}-\u{1F9B3}\u{1F9BC}\u{1F9BD}])|\u{1F3FF}\u200D[\u{1F33E}\u{1F373}\u{1F37C}\u{1F393}\u{1F3A4}\u{1F3A8}\u{1F3EB}\u{1F3ED}\u{1F4BB}\u{1F4BC}\u{1F527}\u{1F52C}\u{1F680}\u{1F692}\u{1F9AF}-\u{1F9B3}\u{1F9BC}\u{1F9BD}]|\u{1F3FE}\u200D[\u{1F33E}\u{1F373}\u{1F37C}\u{1F393}\u{1F3A4}\u{1F3A8}\u{1F3EB}\u{1F3ED}\u{1F4BB}\u{1F4BC}\u{1F527}\u{1F52C}\u{1F680}\u{1F692}\u{1F9AF}-\u{1F9B3}\u{1F9BC}\u{1F9BD}]|\u{1F3FD}\u200D[\u{1F33E}\u{1F373}\u{1F37C}\u{1F393}\u{1F3A4}\u{1F3A8}\u{1F3EB}\u{1F3ED}\u{1F4BB}\u{1F4BC}\u{1F527}\u{1F52C}\u{1F680}\u{1F692}\u{1F9AF}-\u{1F9B3}\u{1F9BC}\u{1F9BD}]|\u{1F3FC}\u200D[\u{1F33E}\u{1F373}\u{1F37C}\u{1F393}\u{1F3A4}\u{1F3A8}\u{1F3EB}\u{1F3ED}\u{1F4BB}\u{1F4BC}\u{1F527}\u{1F52C}\u{1F680}\u{1F692}\u{1F9AF}-\u{1F9B3}\u{1F9BC}\u{1F9BD}]|\u{1F3FB}\u200D[\u{1F33E}\u{1F373}\u{1F37C}\u{1F393}\u{1F3A4}\u{1F3A8}\u{1F3EB}\u{1F3ED}\u{1F4BB}\u{1F4BC}\u{1F527}\u{1F52C}\u{1F680}\u{1F692}\u{1F9AF}-\u{1F9B3}\u{1F9BC}\u{1F9BD}])|\u{1F469}\u{1F3FF}\u200D\u{1F91D}\u200D[\u{1F468}\u{1F469}][\u{1F3FB}-\u{1F3FE}]|\u{1F469}\u{1F3FE}\u200D\u{1F91D}\u200D[\u{1F468}\u{1F469}][\u{1F3FB}-\u{1F3FD}\u{1F3FF}]|\u{1F469}\u{1F3FD}\u200D\u{1F91D}\u200D[\u{1F468}\u{1F469}][\u{1F3FB}\u{1F3FC}\u{1F3FE}\u{1F3FF}]|\u{1F469}\u{1F3FC}\u200D\u{1F91D}\u200D[\u{1F468}\u{1F469}][\u{1F3FB}\u{1F3FD}-\u{1F3FF}]|\u{1F469}\u{1F3FB}\u200D\u{1F91D}\u200D[\u{1F468}\u{1F469}][\u{1F3FC}-\u{1F3FF}]|\u{1F469}\u200D\u{1F466}\u200D\u{1F466}|\u{1F469}\u200D\u{1F469}\u200D[\u{1F466}\u{1F467}]|(?:\u{1F441}\uFE0F\u200D\u{1F5E8}|\u{1F469}(?:\u{1F3FF}\u200D[\u2695\u2696\u2708]|\u{1F3FE}\u200D[\u2695\u2696\u2708]|\u{1F3FD}\u200D[\u2695\u2696\u2708]|\u{1F3FC}\u200D[\u2695\u2696\u2708]|\u{1F3FB}\u200D[\u2695\u2696\u2708]|\u200D[\u2695\u2696\u2708])|\u{1F3F3}\uFE0F\u200D\u26A7|\u{1F9D1}(?:[\u{1F3FB}-\u{1F3FF}]\u200D[\u2695\u2696\u2708]|\u200D[\u2695\u2696\u2708])|\u{1F43B}\u200D\u2744|[\u{1F3C3}\u{1F3C4}\u{1F3CA}\u{1F46E}\u{1F470}\u{1F471}\u{1F473}\u{1F477}\u{1F481}\u{1F482}\u{1F486}\u{1F487}\u{1F645}-\u{1F647}\u{1F64B}\u{1F64D}\u{1F64E}\u{1F6A3}\u{1F6B4}-\u{1F6B6}\u{1F926}\u{1F935}\u{1F937}-\u{1F939}\u{1F93D}\u{1F93E}\u{1F9B8}\u{1F9B9}\u{1F9CD}-\u{1F9CF}\u{1F9D6}-\u{1F9DD}][\u{1F3FB}-\u{1F3FF}]\u200D[\u2640\u2642]|[\u26F9\u{1F3CB}\u{1F3CC}\u{1F575}](?:\uFE0F\u200D[\u2640\u2642]|[\u{1F3FB}-\u{1F3FF}]\u200D[\u2640\u2642])|\u{1F3F4}\u200D\u2620|[\u{1F3C3}\u{1F3C4}\u{1F3CA}\u{1F46E}-\u{1F471}\u{1F473}\u{1F477}\u{1F481}\u{1F482}\u{1F486}\u{1F487}\u{1F645}-\u{1F647}\u{1F64B}\u{1F64D}\u{1F64E}\u{1F6A3}\u{1F6B4}-\u{1F6B6}\u{1F926}\u{1F935}\u{1F937}-\u{1F939}\u{1F93C}-\u{1F93E}\u{1F9B8}\u{1F9B9}\u{1F9CD}-\u{1F9CF}\u{1F9D6}-\u{1F9DF}]\u200D[\u2640\u2642])\uFE0F|\u{1F469}\u200D\u{1F467}\u200D[\u{1F466}\u{1F467}]|\u{1F3F3}\uFE0F\u200D\u{1F308}|\u{1F469}\u200D\u{1F467}|\u{1F469}\u200D\u{1F466}|\u{1F415}\u200D\u{1F9BA}|\u{1F1FD}\u{1F1F0}|\u{1F1F6}\u{1F1E6}|\u{1F1F4}\u{1F1F2}|\u{1F408}\u200D\u2B1B|\u{1F9D1}[\u{1F3FB}-\u{1F3FF}]|\u{1F469}[\u{1F3FB}-\u{1F3FF}]|\u{1F1FF}[\u{1F1E6}\u{1F1F2}\u{1F1FC}]|\u{1F1FE}[\u{1F1EA}\u{1F1F9}]|\u{1F1FC}[\u{1F1EB}\u{1F1F8}]|\u{1F1FB}[\u{1F1E6}\u{1F1E8}\u{1F1EA}\u{1F1EC}\u{1F1EE}\u{1F1F3}\u{1F1FA}]|\u{1F1FA}[\u{1F1E6}\u{1F1EC}\u{1F1F2}\u{1F1F3}\u{1F1F8}\u{1F1FE}\u{1F1FF}]|\u{1F1F9}[\u{1F1E6}\u{1F1E8}\u{1F1E9}\u{1F1EB}-\u{1F1ED}\u{1F1EF}-\u{1F1F4}\u{1F1F7}\u{1F1F9}\u{1F1FB}\u{1F1FC}\u{1F1FF}]|\u{1F1F8}[\u{1F1E6}-\u{1F1EA}\u{1F1EC}-\u{1F1F4}\u{1F1F7}-\u{1F1F9}\u{1F1FB}\u{1F1FD}-\u{1F1FF}]|\u{1F1F7}[\u{1F1EA}\u{1F1F4}\u{1F1F8}\u{1F1FA}\u{1F1FC}]|\u{1F1F5}[\u{1F1E6}\u{1F1EA}-\u{1F1ED}\u{1F1F0}-\u{1F1F3}\u{1F1F7}-\u{1F1F9}\u{1F1FC}\u{1F1FE}]|\u{1F1F3}[\u{1F1E6}\u{1F1E8}\u{1F1EA}-\u{1F1EC}\u{1F1EE}\u{1F1F1}\u{1F1F4}\u{1F1F5}\u{1F1F7}\u{1F1FA}\u{1F1FF}]|\u{1F1F2}[\u{1F1E6}\u{1F1E8}-\u{1F1ED}\u{1F1F0}-\u{1F1FF}]|\u{1F1F1}[\u{1F1E6}-\u{1F1E8}\u{1F1EE}\u{1F1F0}\u{1F1F7}-\u{1F1FB}\u{1F1FE}]|\u{1F1F0}[\u{1F1EA}\u{1F1EC}-\u{1F1EE}\u{1F1F2}\u{1F1F3}\u{1F1F5}\u{1F1F7}\u{1F1FC}\u{1F1FE}\u{1F1FF}]|\u{1F1EF}[\u{1F1EA}\u{1F1F2}\u{1F1F4}\u{1F1F5}]|\u{1F1EE}[\u{1F1E8}-\u{1F1EA}\u{1F1F1}-\u{1F1F4}\u{1F1F6}-\u{1F1F9}]|\u{1F1ED}[\u{1F1F0}\u{1F1F2}\u{1F1F3}\u{1F1F7}\u{1F1F9}\u{1F1FA}]|\u{1F1EC}[\u{1F1E6}\u{1F1E7}\u{1F1E9}-\u{1F1EE}\u{1F1F1}-\u{1F1F3}\u{1F1F5}-\u{1F1FA}\u{1F1FC}\u{1F1FE}]|\u{1F1EB}[\u{1F1EE}-\u{1F1F0}\u{1F1F2}\u{1F1F4}\u{1F1F7}]|\u{1F1EA}[\u{1F1E6}\u{1F1E8}\u{1F1EA}\u{1F1EC}\u{1F1ED}\u{1F1F7}-\u{1F1FA}]|\u{1F1E9}[\u{1F1EA}\u{1F1EC}\u{1F1EF}\u{1F1F0}\u{1F1F2}\u{1F1F4}\u{1F1FF}]|\u{1F1E8}[\u{1F1E6}\u{1F1E8}\u{1F1E9}\u{1F1EB}-\u{1F1EE}\u{1F1F0}-\u{1F1F5}\u{1F1F7}\u{1F1FA}-\u{1F1FF}]|\u{1F1E7}[\u{1F1E6}\u{1F1E7}\u{1F1E9}-\u{1F1EF}\u{1F1F1}-\u{1F1F4}\u{1F1F6}-\u{1F1F9}\u{1F1FB}\u{1F1FC}\u{1F1FE}\u{1F1FF}]|\u{1F1E6}[\u{1F1E8}-\u{1F1EC}\u{1F1EE}\u{1F1F1}\u{1F1F2}\u{1F1F4}\u{1F1F6}-\u{1F1FA}\u{1F1FC}\u{1F1FD}\u{1F1FF}]|[#\*0-9]\uFE0F\u20E3|[\u{1F3C3}\u{1F3C4}\u{1F3CA}\u{1F46E}\u{1F470}\u{1F471}\u{1F473}\u{1F477}\u{1F481}\u{1F482}\u{1F486}\u{1F487}\u{1F645}-\u{1F647}\u{1F64B}\u{1F64D}\u{1F64E}\u{1F6A3}\u{1F6B4}-\u{1F6B6}\u{1F926}\u{1F935}\u{1F937}-\u{1F939}\u{1F93D}\u{1F93E}\u{1F9B8}\u{1F9B9}\u{1F9CD}-\u{1F9CF}\u{1F9D6}-\u{1F9DD}][\u{1F3FB}-\u{1F3FF}]|[\u26F9\u{1F3CB}\u{1F3CC}\u{1F575}][\u{1F3FB}-\u{1F3FF}]|[\u261D\u270A-\u270D\u{1F385}\u{1F3C2}\u{1F3C7}\u{1F442}\u{1F443}\u{1F446}-\u{1F450}\u{1F466}\u{1F467}\u{1F46B}-\u{1F46D}\u{1F472}\u{1F474}-\u{1F476}\u{1F478}\u{1F47C}\u{1F483}\u{1F485}\u{1F4AA}\u{1F574}\u{1F57A}\u{1F590}\u{1F595}\u{1F596}\u{1F64C}\u{1F64F}\u{1F6C0}\u{1F6CC}\u{1F90C}\u{1F90F}\u{1F918}-\u{1F91C}\u{1F91E}\u{1F91F}\u{1F930}-\u{1F934}\u{1F936}\u{1F977}\u{1F9B5}\u{1F9B6}\u{1F9BB}\u{1F9D2}-\u{1F9D5}][\u{1F3FB}-\u{1F3FF}]|[\u231A\u231B\u23E9-\u23EC\u23F0\u23F3\u25FD\u25FE\u2614\u2615\u2648-\u2653\u267F\u2693\u26A1\u26AA\u26AB\u26BD\u26BE\u26C4\u26C5\u26CE\u26D4\u26EA\u26F2\u26F3\u26F5\u26FA\u26FD\u2705\u270A\u270B\u2728\u274C\u274E\u2753-\u2755\u2757\u2795-\u2797\u27B0\u27BF\u2B1B\u2B1C\u2B50\u2B55\u{1F004}\u{1F0CF}\u{1F18E}\u{1F191}-\u{1F19A}\u{1F1E6}-\u{1F1FF}\u{1F201}\u{1F21A}\u{1F22F}\u{1F232}-\u{1F236}\u{1F238}-\u{1F23A}\u{1F250}\u{1F251}\u{1F300}-\u{1F320}\u{1F32D}-\u{1F335}\u{1F337}-\u{1F37C}\u{1F37E}-\u{1F393}\u{1F3A0}-\u{1F3CA}\u{1F3CF}-\u{1F3D3}\u{1F3E0}-\u{1F3F0}\u{1F3F4}\u{1F3F8}-\u{1F43E}\u{1F440}\u{1F442}-\u{1F4FC}\u{1F4FF}-\u{1F53D}\u{1F54B}-\u{1F54E}\u{1F550}-\u{1F567}\u{1F57A}\u{1F595}\u{1F596}\u{1F5A4}\u{1F5FB}-\u{1F64F}\u{1F680}-\u{1F6C5}\u{1F6CC}\u{1F6D0}-\u{1F6D2}\u{1F6D5}-\u{1F6D7}\u{1F6EB}\u{1F6EC}\u{1F6F4}-\u{1F6FC}\u{1F7E0}-\u{1F7EB}\u{1F90C}-\u{1F93A}\u{1F93C}-\u{1F945}\u{1F947}-\u{1F978}\u{1F97A}-\u{1F9CB}\u{1F9CD}-\u{1F9FF}\u{1FA70}-\u{1FA74}\u{1FA78}-\u{1FA7A}\u{1FA80}-\u{1FA86}\u{1FA90}-\u{1FAA8}\u{1FAB0}-\u{1FAB6}\u{1FAC0}-\u{1FAC2}\u{1FAD0}-\u{1FAD6}]|[#\*0-9\xA9\xAE\u203C\u2049\u2122\u2139\u2194-\u2199\u21A9\u21AA\u231A\u231B\u2328\u23CF\u23E9-\u23F3\u23F8-\u23FA\u24C2\u25AA\u25AB\u25B6\u25C0\u25FB-\u25FE\u2600-\u2604\u260E\u2611\u2614\u2615\u2618\u261D\u2620\u2622\u2623\u2626\u262A\u262E\u262F\u2638-\u263A\u2640\u2642\u2648-\u2653\u265F\u2660\u2663\u2665\u2666\u2668\u267B\u267E\u267F\u2692-\u2697\u2699\u269B\u269C\u26A0\u26A1\u26A7\u26AA\u26AB\u26B0\u26B1\u26BD\u26BE\u26C4\u26C5\u26C8\u26CE\u26CF\u26D1\u26D3\u26D4\u26E9\u26EA\u26F0-\u26F5\u26F7-\u26FA\u26FD\u2702\u2705\u2708-\u270D\u270F\u2712\u2714\u2716\u271D\u2721\u2728\u2733\u2734\u2744\u2747\u274C\u274E\u2753-\u2755\u2757\u2763\u2764\u2795-\u2797\u27A1\u27B0\u27BF\u2934\u2935\u2B05-\u2B07\u2B1B\u2B1C\u2B50\u2B55\u3030\u303D\u3297\u3299\u{1F004}\u{1F0CF}\u{1F170}\u{1F171}\u{1F17E}\u{1F17F}\u{1F18E}\u{1F191}-\u{1F19A}\u{1F1E6}-\u{1F1FF}\u{1F201}\u{1F202}\u{1F21A}\u{1F22F}\u{1F232}-\u{1F23A}\u{1F250}\u{1F251}\u{1F300}-\u{1F321}\u{1F324}-\u{1F393}\u{1F396}\u{1F397}\u{1F399}-\u{1F39B}\u{1F39E}-\u{1F3F0}\u{1F3F3}-\u{1F3F5}\u{1F3F7}-\u{1F4FD}\u{1F4FF}-\u{1F53D}\u{1F549}-\u{1F54E}\u{1F550}-\u{1F567}\u{1F56F}\u{1F570}\u{1F573}-\u{1F57A}\u{1F587}\u{1F58A}-\u{1F58D}\u{1F590}\u{1F595}\u{1F596}\u{1F5A4}\u{1F5A5}\u{1F5A8}\u{1F5B1}\u{1F5B2}\u{1F5BC}\u{1F5C2}-\u{1F5C4}\u{1F5D1}-\u{1F5D3}\u{1F5DC}-\u{1F5DE}\u{1F5E1}\u{1F5E3}\u{1F5E8}\u{1F5EF}\u{1F5F3}\u{1F5FA}-\u{1F64F}\u{1F680}-\u{1F6C5}\u{1F6CB}-\u{1F6D2}\u{1F6D5}-\u{1F6D7}\u{1F6E0}-\u{1F6E5}\u{1F6E9}\u{1F6EB}\u{1F6EC}\u{1F6F0}\u{1F6F3}-\u{1F6FC}\u{1F7E0}-\u{1F7EB}\u{1F90C}-\u{1F93A}\u{1F93C}-\u{1F945}\u{1F947}-\u{1F978}\u{1F97A}-\u{1F9CB}\u{1F9CD}-\u{1F9FF}\u{1FA70}-\u{1FA74}\u{1FA78}-\u{1FA7A}\u{1FA80}-\u{1FA86}\u{1FA90}-\u{1FAA8}\u{1FAB0}-\u{1FAB6}\u{1FAC0}-\u{1FAC2}\u{1FAD0}-\u{1FAD6}]\uFE0F|[\u261D\u26F9\u270A-\u270D\u{1F385}\u{1F3C2}-\u{1F3C4}\u{1F3C7}\u{1F3CA}-\u{1F3CC}\u{1F442}\u{1F443}\u{1F446}-\u{1F450}\u{1F466}-\u{1F478}\u{1F47C}\u{1F481}-\u{1F483}\u{1F485}-\u{1F487}\u{1F48F}\u{1F491}\u{1F4AA}\u{1F574}\u{1F575}\u{1F57A}\u{1F590}\u{1F595}\u{1F596}\u{1F645}-\u{1F647}\u{1F64B}-\u{1F64F}\u{1F6A3}\u{1F6B4}-\u{1F6B6}\u{1F6C0}\u{1F6CC}\u{1F90C}\u{1F90F}\u{1F918}-\u{1F91F}\u{1F926}\u{1F930}-\u{1F939}\u{1F93C}-\u{1F93E}\u{1F977}\u{1F9B5}\u{1F9B6}\u{1F9B8}\u{1F9B9}\u{1F9BB}\u{1F9CD}-\u{1F9CF}\u{1F9D1}-\u{1F9DD}]/gu.exec(s);
-      if (res) return res[0];
-      else return false;
+    function stripTags(html) {
+      const div = document.createElement('div');
+      div.innerHTML = html;
+      return div.textContent.trim();
     }
 
-    function process_events(el) {
-      let events = el.childNodes;
-      for (let idx = 0; idx < events.length; idx++) {
-        if (events[idx].nodeType == 1) {
-          let ev = events[idx];
-          ev.childNodes.forEach(n => {
-            if (n.nodeType === Node.TEXT_NODE) {
-              if (n.textContent.startsWith('*')) {
-                if (password) {
-                  try {
-                    n.textContent = CryptoJS.AES.decrypt(n.textContent.substr(1), password).toString(CryptoJS.enc.Utf8);
-                  } catch {
-                    n.textContent = '*decryption error'
-                  }
-                } else {
-                  n.textContent = '*encrypted message'
-                }
-              }
+    // ---------- emoji detection ----------
+    // Simplified single-codepoint matcher covering the common emoji blocks.
+    // Good enough for picking a glyph to show on a cell.
+    function extractEmoji(s) {
+      const res = /[\u{2600}-\u{27BF}\u{1F300}-\u{1FAFF}]/u.exec(s);
+      return res ? res[0] : false;
+    }
+
+    // ---------- parsing ----------
+    function decryptIfNeeded(el) {
+      el.childNodes.forEach(n => {
+        if (n.nodeType === Node.TEXT_NODE && n.textContent.trim().startsWith('*')) {
+          if (password) {
+            try {
+              n.textContent = CryptoJS.AES.decrypt(n.textContent.trim().substring(1), password).toString(CryptoJS.enc.Utf8);
+            } catch {
+              n.textContent = '*decryption error';
             }
-          })
-          const content = ev.innerHTML;
-
-          if (ev.getAttribute('date') != null) {
-            // one-day event
-            let cur_date = new Date(Date.parse(ev.getAttribute('date')));
-            let el_idx = getIdxByDate(cur_date);
-            let day_el = days[el_idx];
-            if (!day_el) continue;
-            if (ev.getAttribute('icon') != null) {
-              day_el.style.backgroundSize = '100% 100%';
-              day_el.style.backgroundImage = 'url("' + ev.getAttribute('icon') + '")';
-            }
-
-            if (ev.getAttribute('color') != null) {
-              day_el.style.backgroundColor = ev.getAttribute('color');
-              day_el.no_credit_color = true;
-            }
-
-            if (ev.className == 'base') {
-              day_el.hue = parseInt(ev.getAttribute('hue'));
-            }
-
-            let ev_credit = parseFloat(ev.getAttribute('credit'));
-            day_el.credit += ev_credit == NaN ? 1 : ev_credit;
-            if (!day_el.no_credit_color)
-              day_el.style.backgroundColor = getColor(day_el.hue, day_el.credit);
-
-            dateStr = getDateStr(cur_date);
-            if (!dateToDetailsData[dateStr]) {
-              dateToDetailsData[dateStr] = content;
-            } else {
-              dateToDetailsData[dateStr] += '<br>' + content;
-            }
-
-            ev.childNodes.forEach((cn) => {
-              let emo = is_emoji(cn.textContent.trim());
-              if (cn.nodeType === 3 && emo) {
-                day_el.innerHTML = emo;
-              }
-            })
-          } else if (ev.getAttribute('start') != null && ev.getAttribute('end') != null) {
-            // mutiple-day event
-            let start = new Date(Date.parse(ev.getAttribute('start')));
-            let end = new Date(Date.parse(ev.getAttribute('end')));
-            for (; start <= end; start.setDate(start.getDate() + 1)) {
-              let el_idx = getIdxByDate(start);
-              let day_el = days[el_idx];
-              if (!day_el) continue;
-              if (ev.getAttribute('color') != null) {
-                day_el.style.backgroundColor = ev.getAttribute('color');
-                day_el.no_credit_color = true;
-              }
-
-              if (ev.className == 'base') {
-                day_el.hue = parseInt(ev.getAttribute('hue'));
-              }
-
-              let ev_credit = parseFloat(ev.getAttribute('credit'));
-              day_el.credit += ev_credit == NaN ? 1 : ev_credit;
-              if (!day_el.no_credit_color)
-                day_el.style.backgroundColor = getColor(day_el.hue, day_el.credit);
-              // console.log(getColor(day_el.hue, day_el.credit));
-
-              dateStr = getDateStr(start);
-              if (!dateToDetailsData[dateStr]) {
-                dateToDetailsData[dateStr] = content;
-              } else {
-                dateToDetailsData[dateStr] += '<br>' + content;
-              }
-            }
-
+          } else {
+            n.textContent = '*encrypted message';
           }
         }
+      });
+    }
+
+    function processEventsDoc(el) {
+      if (!el) return;
+      Array.from(el.children).forEach(ev => {
+        decryptIfNeeded(ev);
+        const content = ev.innerHTML.trim();
+        if (!content) return;
+
+        if (ev.classList.contains('base')) {
+          const start = parseStrictDate(ev.getAttribute('start'));
+          const end = parseStrictDate(ev.getAttribute('end'));
+          if (!start || !end) return;
+          if (end <= start) { warn(`Stage "${stripTags(content)}" ends before (or on) its start date`); return; }
+
+          let color;
+          const colorName = ev.getAttribute('stage-color');
+          if (colorName) {
+            color = PALETTE_MAP[colorName];
+            if (!color) warn(`Unknown stage-color "${colorName}" on stage "${stripTags(content)}", auto-assigning instead`);
+          }
+          if (!color) { color = PALETTE[stageColorIdx % PALETTE.length].hex; stageColorIdx++; }
+
+          stages.push({ start: start.getTime(), end: end.getTime(), name: content, color });
+        } else if (ev.getAttribute('date') != null) {
+          const d = parseStrictDate(ev.getAttribute('date'));
+          if (!d) return;
+          events.push({
+            date: d.getTime(),
+            name: content,
+            color: ev.getAttribute('color'),
+            icon: ev.getAttribute('icon'),
+          });
+        } else if (ev.getAttribute('start') != null && ev.getAttribute('end') != null) {
+          const s = parseStrictDate(ev.getAttribute('start'));
+          const e = parseStrictDate(ev.getAttribute('end'));
+          if (!s || !e) return;
+          if (e < s) { warn(`Event "${stripTags(content)}" ends before its start date`); return; }
+          events.push({ date: s.getTime(), endDate: e.getTime(), name: content, color: ev.getAttribute('color') });
+        }
+      });
+    }
+
+    async function loadEvents() {
+      for (const file of eventFiles) {
+        try {
+          const res = await fetch(file);
+          const text = await res.text();
+          const doc = new DOMParser().parseFromString(text, 'text/html');
+          processEventsDoc(doc.getElementById('events'));
+        } catch (e) {
+          warn(`Failed to load ${file}: ${e.message}`);
+        }
       }
+      stages.sort((a, b) => a.start - b.start);
+      renderWarnings();
+      buildGrid();
     }
 
-
-    let cur_offset_y = today_el.getBoundingClientRect().top - document.body.getBoundingClientRect().top;
-    window.onload = () => {
-      window.scroll(0, cur_offset_y - document.documentElement.clientHeight / 2);
-      // console.log(cur_offset_y - document.documentElement.clientHeight/2);
+    function renderWarnings() {
+      const w = document.getElementById('warnings');
+      if (dataWarnings.length === 0) { w.hidden = true; return; }
+      w.hidden = false;
+      w.textContent = `⚠ ${dataWarnings.length} data issue(s) ignored — see console`;
+      w.title = dataWarnings.join('\n');
     }
 
-// setTimeout(() => {
-//     window.scroll(0, cur_offset_y - document.documentElement.clientHeight/2);
-// }, 500);
+    // ---------- grid layout ----------
+    function stepDate(ms, unitName) {
+      const d = new Date(ms);
+      switch (unitName) {
+        case 'week': d.setDate(d.getDate() + 7); break;
+        case 'month': d.setMonth(d.getMonth() + 1); break;
+        case 'quarter': d.setMonth(d.getMonth() + 3); break;
+        case 'year': d.setFullYear(d.getFullYear() + 1); break;
+      }
+      return d.getTime();
+    }
+
+    // Pick the finest unit + column count that packs the whole lifespan
+    // into a near-square-cell grid fitting the available box.
+    function pickGrid(availW, availH) {
+      const totalDays = (death.getTime() - birth.getTime()) / 86400000;
+      const aspect = Math.max(0.2, Math.min(5, availW / availH));
+      let chosen = null;
+      for (const u of UNITS) {
+        const N = Math.max(1, Math.ceil(totalDays / u.days));
+        const C = Math.max(1, Math.round(Math.sqrt(N * aspect)));
+        const R = Math.ceil(N / C);
+        const cell = Math.min((availW - (C - 1) * GAP) / C, (availH - (R - 1) * GAP) / R);
+        chosen = { unit: u, C, cell };
+        if (cell >= MIN_CELL || u.name === 'year') break;
+      }
+      return chosen;
+    }
+
+    function findCellIndex(boundaries, ms) {
+      let lo = 0, hi = boundaries.length - 2;
+      while (lo < hi) {
+        const mid = (lo + hi + 1) >> 1;
+        if (boundaries[mid] <= ms) lo = mid; else hi = mid - 1;
+      }
+      return lo;
+    }
+
+    function stageForRange(s0, s1) {
+      let best = null, bestOverlap = 0;
+      stages.forEach(st => {
+        const overlap = Math.min(st.end, s1) - Math.max(st.start, s0);
+        if (overlap > bestOverlap) { bestOverlap = overlap; best = st; }
+      });
+      return best;
+    }
+
+    function eventsForRange(s0, s1) {
+      return events.filter(ev => ev.endDate != null
+        ? (ev.date < s1 && ev.endDate > s0)
+        : (ev.date >= s0 && ev.date < s1));
+    }
+
+    function cellTooltip(d) {
+      let html = `<b>${fmtDate(d.s0)} – ${fmtDate(d.s1 - 1)}</b>`;
+      if (d.st) html += `<br>${d.st.name}`;
+      d.evs.forEach(e => {
+        html += `<br>• ${fmtDate(e.date)}${e.endDate != null ? (' → ' + fmtDate(e.endDate)) : ''}: ${e.name}`;
+      });
+      if (today.getTime() >= d.s0 && today.getTime() < d.s1) {
+        html += `<br><i>— today (${fmtDate(today.getTime())})</i>`;
+      }
+      return html;
+    }
+
+    function buildGrid() {
+      const timelineEl = document.getElementById('timeline');
+      timelineEl.innerHTML = '';
+      const availW = Math.max(100, (timelineEl.clientWidth || 800) - 40);
+      const availH = Math.max(60, timelineEl.clientHeight || 400);
+      const picked = pickGrid(availW, availH);
+
+      // Generate exact calendar-based cell boundaries (avoids drift from
+      // using average unit lengths). Underlying dates stay exact; only the
+      // display groups them into `picked.unit` chunks.
+      const boundaries = [birth.getTime()];
+      let cur = birth.getTime();
+      const deathMs = death.getTime();
+      while (cur < deathMs) {
+        cur = stepDate(cur, picked.unit.name);
+        if (cur > deathMs) cur = deathMs;
+        boundaries.push(cur);
+      }
+      const N = boundaries.length - 1;
+      const C = picked.C;
+      const R = Math.ceil(N / C);
+      const cellPx = Math.max(3, Math.floor(Math.min((availW - (C - 1) * GAP) / C, (availH - (R - 1) * GAP) / R) * 10) / 10);
+
+      // sparse year axis labels
+      const totalYears = Math.max(1, Math.round((deathMs - birth.getTime()) / (365.2425 * 86400000)));
+      const niceSteps = [1, 2, 5, 10, 20, 25, 50];
+      const labelStep = niceSteps.find(s => s >= totalYears / 16) || 50;
+
+      const wrap = document.createElement('div');
+      wrap.id = 'grid-wrap';
+
+      const axis = document.createElement('div');
+      axis.id = 'year-axis';
+      axis.style.height = (R * cellPx + (R - 1) * GAP) + 'px';
+
+      const birthYear = birth.getFullYear();
+      const labelRows = new Set();
+      const addLabel = (ms, text) => {
+        const idx = findCellIndex(boundaries, ms);
+        const row = Math.floor(idx / C);
+        if (labelRows.has(row)) return;
+        labelRows.add(row);
+        const lbl = document.createElement('div');
+        lbl.className = 'year-label';
+        lbl.style.top = (row * (cellPx + GAP)) + 'px';
+        lbl.textContent = text;
+        axis.appendChild(lbl);
+      };
+      addLabel(birth.getTime(), birthYear); // always mark the start of the range
+      for (let y = birthYear; y <= death.getFullYear(); y += labelStep) {
+        const ms = new Date(y, 0, 1).getTime();
+        if (ms < birth.getTime() || ms >= deathMs) continue;
+        addLabel(ms, y);
+      }
+      addLabel(deathMs - 1, death.getFullYear()); // always mark the end of the range
+
+      const grid = document.createElement('div');
+      grid.id = 'grid';
+      grid.style.gridTemplateColumns = `repeat(${C}, ${cellPx}px)`;
+      grid.style.gridAutoRows = `${cellPx}px`;
+      grid.style.gap = GAP + 'px';
+
+      cellData = new Array(N);
+      const todayMs = today.getTime();
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < N; i++) {
+        const s0 = boundaries[i], s1 = boundaries[i + 1];
+        const st = stageForRange(s0, s1);
+        const evs = eventsForRange(s0, s1);
+        cellData[i] = { s0, s1, st, evs };
+
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.dataset.idx = i;
+        cell.style.background = st ? st.color : 'var(--track)';
+
+        if (evs.length) {
+          cell.classList.add('has-event');
+          const withColor = evs.find(e => e.color);
+          const withIcon = evs.find(e => e.icon);
+          if (withColor) cell.style.background = withColor.color;
+          if (withIcon) {
+            cell.style.backgroundImage = `url("${withIcon.icon}")`;
+            cell.style.backgroundSize = 'cover';
+          } else {
+            const emo = evs.map(e => extractEmoji(stripTags(e.name))).find(Boolean);
+            if (emo) {
+              const g = document.createElement('span');
+              g.className = 'glyph';
+              g.textContent = emo;
+              cell.appendChild(g);
+            }
+          }
+        }
+        if (todayMs >= s0 && todayMs < s1) cell.classList.add('today');
+
+        frag.appendChild(cell);
+      }
+      grid.appendChild(frag);
+
+      wrap.appendChild(axis);
+      wrap.appendChild(grid);
+      timelineEl.appendChild(wrap);
+    }
+
+    // ---------- tooltip / interaction (event delegation on the grid) ----------
+    const tooltip = document.getElementById('tooltip');
+
+    function positionTooltip(x, y) {
+      const pad = 12;
+      let left = x + pad, top = y + pad;
+      const rect = tooltip.getBoundingClientRect();
+      if (left + rect.width > window.innerWidth - 8) left = Math.max(8, x - rect.width - pad);
+      if (top + rect.height > window.innerHeight - 8) top = Math.max(8, window.innerHeight - rect.height - 8);
+      tooltip.style.left = left + 'px';
+      tooltip.style.top = top + 'px';
+    }
+
+    function showTooltip(html, x, y) {
+      tooltip.innerHTML = html;
+      tooltip.hidden = false;
+      positionTooltip(x, y);
+    }
+
+    function hideTooltip() {
+      if (!pinnedEl) tooltip.hidden = true;
+    }
+
+    function pinCell(cell, x, y) {
+      if (pinnedEl === cell) {
+        pinnedEl = null;
+        tooltip.hidden = true;
+        tooltip.classList.remove('pinned');
+        return;
+      }
+      pinnedEl = cell;
+      tooltip.classList.add('pinned');
+      showTooltip(cellTooltip(cellData[+cell.dataset.idx]), x, y);
+    }
+
+    document.getElementById('timeline').addEventListener('mouseover', e => {
+      const cell = e.target.closest('.cell');
+      if (!cell || pinnedEl) return;
+      showTooltip(cellTooltip(cellData[+cell.dataset.idx]), e.clientX, e.clientY);
+    });
+    document.getElementById('timeline').addEventListener('mousemove', e => {
+      if (pinnedEl) return;
+      if (e.target.closest('.cell')) positionTooltip(e.clientX, e.clientY);
+    });
+    document.getElementById('timeline').addEventListener('mouseout', e => {
+      if (e.target.closest('.cell') && !pinnedEl) hideTooltip();
+    });
+    document.getElementById('timeline').addEventListener('click', e => {
+      const cell = e.target.closest('.cell');
+      if (!cell) return;
+      e.stopPropagation();
+      pinCell(cell, e.clientX, e.clientY);
+    });
+
+    document.addEventListener('click', () => {
+      if (pinnedEl) {
+        pinnedEl = null;
+        tooltip.hidden = true;
+        tooltip.classList.remove('pinned');
+      }
+    });
+
+    // ---------- boot ----------
+    loadEvents();
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(buildGrid, 120);
+    });
   </script>
 </body>
 
