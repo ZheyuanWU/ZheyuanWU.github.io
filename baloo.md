@@ -17,15 +17,6 @@ title: Random Baloo!
   </a>
 </figure>
 
-<p class="baloo-pet-link">
-  If you use ChatGPT, you can
-  <a
-    href="https://chatgpt.com/s/sharepet_6a8f100f5a8c8191836528c0a200349d"
-    target="_blank"
-    rel="noopener noreferrer">
-    adopt your very own e-Baloo 🐾</a>
-</p>
-
 <script>
   window.balooPhotos = [
     {% for photo in site.data.baloo %}
